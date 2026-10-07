@@ -16,12 +16,14 @@ export const PokemonCard = ( { pokemon }:Props ) => {
 
   return(
     <TouchableOpacity
+      activeOpacity={0.85}
       onPress={ () => navigation.navigate('PokemonDetail', { NewPokemonList: pokemon }) }
     >
       <View
         style={{
           ...style.containerCard,
-          width: widthWindows * 0.4
+          width: widthWindows * 0.4,
+          shadowColor: (isLoading) ? 'gray' : color[0]
         }}
       >
         <View
@@ -36,10 +38,12 @@ export const PokemonCard = ( { pokemon }:Props ) => {
             backgroundColor: (isLoading) ? 'gray' : color[0]
           }}
         />
+        <View style={ style.shine }/>
         <Image
           style={ style.pokeball }
           source={ require('./../../assets/pokeball-light.png') }
         />
+        <View style={ style.pokemonShadow }/>
         <Image
           style={ style.pokemon }
           source={{ uri: pokemon.image }}
@@ -48,8 +52,10 @@ export const PokemonCard = ( { pokemon }:Props ) => {
           style={ style.name }
         >
           { pokemon.name }
-          { `\n#${pokemon.id}` }
         </Text>
+        <View style={ style.idBadge }>
+          <Text style={ style.idText }>{ `#${pokemon.id}` }</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -63,6 +69,12 @@ const style = StyleSheet.create({
     marginHorizontal: 10,
     overflow: 'hidden',
     width: 120,
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.85)',
+    elevation: 8,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 7
   },
   backgroundTop: {
     backgroundColor: 'purple',
@@ -90,6 +102,15 @@ const style = StyleSheet.create({
       { scale: 2 }
     ]
   },
+  shine: {
+    position: 'absolute',
+    top: -30,
+    left: -30,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: 'rgba(255,255,255,0.18)'
+  },
   pokeball: {
     height: 120,
     width: 120,
@@ -97,6 +118,15 @@ const style = StyleSheet.create({
     bottom: -20,
     right: -20,
     opacity: 0.7
+  },
+  pokemonShadow: {
+    position: 'absolute',
+    right: 6,
+    bottom: 4,
+    width: 70,
+    height: 12,
+    borderRadius: 35,
+    backgroundColor: 'rgba(0,0,0,0.25)'
   },
   pokemon: {
     height: 100,
@@ -109,6 +139,25 @@ const style = StyleSheet.create({
     fontSize: 25,
     color: "white",
     fontWeight: 'bold',
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    marginTop: 8,
+    textTransform: 'capitalize',
+    textShadowColor: 'rgba(0,0,0,0.35)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3
+  },
+  idBadge: {
+    alignSelf: 'flex-start',
+    marginLeft: 10,
+    marginTop: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    backgroundColor: 'rgba(0,0,0,0.25)'
+  },
+  idText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14
   }
 });

@@ -42,7 +42,7 @@ export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
         <Text
           style={ style.userText }
         >
-          User Cachas
+          User TonyMxm
         </Text>
         <View>
           <BtnMenu

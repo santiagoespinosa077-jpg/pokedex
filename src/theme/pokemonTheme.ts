@@ -28,20 +28,22 @@ export const pokemonTheme = StyleSheet.create({
     marginLeft: 5
   },
   abilityTag: {
-  	paddingHorizontal: 16,
-  	paddingVertical: 6,
-  	borderRadius: 20,
-  	marginRight: 8,
-  	marginBottom: 8
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+    marginRight: 8,
+    marginBottom: 8
 },
   abilityText: {
-  	color: 'white',
-  	fontWeight: 'bold',
-  	textTransform: 'capitalize'
+    color: 'white',
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
 },
   picture: {
     width: 120,
-    height: 120
+    height: 120,
+    borderRadius: 22,
+    backgroundColor: 'rgba(0,0,0,0.04)'
   },
   infocard: {
     width: '48%',
@@ -51,11 +53,15 @@ export const pokemonTheme = StyleSheet.create({
     borderRadius: 17,
     marginVertical: 5,
     borderWidth: 2,
-    borderColor: 'white',
-    elevation: 4,
+    borderColor: 'rgba(255,255,255,0.9)',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.22,
+    shadowRadius: 5
   },
   containeritems: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#eef1f6',
     paddingHorizontal: 10,
     paddingBottom: 30
   },
@@ -65,10 +71,16 @@ export const pokemonTheme = StyleSheet.create({
     marginVertical: 5,
     padding: 8,
     borderRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
+    borderWidth: 1.5,
+    borderColor: 'rgba(47,93,168,0.18)',
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3
+    elevation: 6,
+    shadowColor: '#2F5DA8',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6
   },
   title:{
     fontSize: 24,
@@ -91,7 +103,7 @@ export const pokemonTheme = StyleSheet.create({
 
   barBackground:{
     height: 12,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#dde2ea',
     borderRadius: 6,
     overflow:'hidden'
   },

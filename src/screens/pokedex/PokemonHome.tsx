@@ -18,7 +18,7 @@ export const PokemonHome = () => {
           position: 'absolute',
           opacity: 0.77
         }}
-        source={ require('./../../../assets/Van.jpg') }
+        source={ require('./../../../assets/wallpaper.jpg') }
       />
         
       
@@ -34,14 +34,14 @@ export const PokemonHome = () => {
 
           <Image
             style={{
-            width: 300,
+            width: 350,
             height: 100,
             opacity: 0.9,
             top: 10,
             marginBottom: 20 
 
               }}
-            source={ require('./../../../assets/pk.png') }
+            source={ require('./../../../assets/pokedex.png') }
             />
             
           </View>
