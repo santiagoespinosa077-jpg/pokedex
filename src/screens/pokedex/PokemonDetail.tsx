@@ -25,7 +25,7 @@ export const PokemonDetail = ( { navigation, route }:Props ) => {
           position: 'absolute',
           opacity: 0.88
         }}
-        source={ require('./../../../assets/Van.jpg') }
+        source={ require('./../../../assets/wallpaper.jpg') }
       />
       <View
         style={{ flex: 2, alignItems: 'center' }}
