@@ -18,7 +18,7 @@ export const PokemonHome = () => {
           position: 'absolute',
           opacity: 0.77
         }}
-        source={ require('./../../../assets/wallpaper.jpg') }
+        source={ require('./../../../assets/Van.jpg') }
       />
         
       

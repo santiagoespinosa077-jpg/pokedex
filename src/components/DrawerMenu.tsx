@@ -42,7 +42,7 @@ export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
         <Text
           style={ style.userText }
         >
-          User TonyMxm
+          User Cachas69
         </Text>
         <View>
           <BtnMenu
@@ -56,6 +56,22 @@ export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
           <BtnMenu
             navigate={ () => navigation.navigate('FormScreen') }
             text="FormScreen"
+          />
+          <BtnMenu
+            navigate={ () => navigation.navigate('ImagePickerScreen') }
+            text="Seleccionar Imagen"
+          />
+          <BtnMenu
+            navigate={ () => navigation.navigate('LocationScreen') }
+            text="Ubicación"
+          />
+          <BtnMenu
+            navigate={ () => navigation.navigate('UserStackNavigator') }
+            text="Gestión de Usuarios"
+          />
+          <BtnMenu
+            navigate={ () => navigation.navigate('TareaStackNavigator') }
+            text="Gestión de tareas"
           />
         </View>
       </View>
