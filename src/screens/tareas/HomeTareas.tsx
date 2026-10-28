@@ -37,7 +37,7 @@ export const HomeTareas = () => {
           position: 'absolute',
           opacity: 0.77
         }}
-        source={ require('./../../../assets/loto.jpg') }
+        source={ require('./../../../assets/black.jpg') }
       />
       <View style={styles.overlay} />
 
@@ -59,7 +59,7 @@ export const HomeTareas = () => {
             <View style={styles.buttonContainer}>
               <BtnTouch
                 color='#1F4E9C'
-                borderColor='#F4EBC1'
+                borderColor='gray'
                 text='Crear tarea'
                 borderWidth={2}
                 onPress={ () => navigation.navigate('FormTarea', { ...create }) }

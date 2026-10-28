@@ -40,7 +40,7 @@ export const useLogin = () => {
   const [ request, setRequest ] = useState<LoginReponse>({} as LoginReponse);
   const { singIn, changeUsername, changeAvatar } = useContext( AuthContext ); 
 
-  const apiUrl: string = 'http://192.168.101.13:3000/users/login';
+  const apiUrl: string = 'http://192.168.213.161:3000/users/login';
 
   const handleInputChange = ( fieldName: keyof LoginData, value: string ) => {
     dispatch({  type:'handleInputChange', payload: { fieldName, value } });

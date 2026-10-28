@@ -39,7 +39,7 @@ export const TareaCard = ( { tarea }: Props ) => {
 const style = StyleSheet.create({
   cardContainer: {
     backgroundColor: '#3B6FB6',
-    borderColor: '#F4EBC1',
+    borderColor: 'gray',
     borderRadius: 10,
     borderWidth: 2,
     padding: 14,

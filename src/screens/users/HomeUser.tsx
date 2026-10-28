@@ -43,7 +43,7 @@ export const HomeUser = () => {
           position: 'absolute',
           opacity: 0.77
         }}
-        source={ require('./../../../assets/Van.jpg') }
+        source={ require('./../../../assets/black.jpg') }
       />
       <FlatList
         data={ listUser }
@@ -55,16 +55,19 @@ export const HomeUser = () => {
             <Text
               style={{
                 ...appTheme.text,
-                color: '#E0A526'
+                color: 'white'
               }}
             >
               Lista de usuarios
             </Text>
             <BtnTouch
               color='#3B6FB6'
-              borderColor='yellow'
-              text='Crear usuario'
+              borderColor='gray'
+              text='+ Crear usuario'
               borderWidth={2}
+              style={{
+
+              }}
               onPress={ () => navigation.navigate('FormUser',{...create}) }
             />
           </View>

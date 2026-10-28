@@ -15,7 +15,7 @@ interface UseProductosApi {
 export const useProductosApi =():UseProductosApi=>{
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listProducto,setListProducto]=useState<ProductosResponse[]>([]);
-  const urlApi= "http://192.168.101.13:3000/producto";
+  const urlApi= "http://192.168.213.161:3000/producto";
 
 const loadProducto = async()=>{
   setIsLoading(true);

@@ -14,6 +14,7 @@ import { AuthContext } from "../context/AuthContext";
 import { LoginUser } from "../screens/users/LoginUser";
 
 
+
 export type RootDrawerParams = {
   StackNavigator:         undefined;
   PokemonNavigator:       undefined;
@@ -23,6 +24,7 @@ export type RootDrawerParams = {
   UserStackNavigator:     undefined;
   TareaStackNavigator:    undefined;
   ProductoStackNavigator: undefined;
+
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
