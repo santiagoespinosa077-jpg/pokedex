@@ -34,7 +34,7 @@ export const FormUser = ( { route, navigation }:Props ) => {
     <View style={{ flex: 1 }}>
       <Image
         style={{
-          ...StyleSheet.absoluteFillObject,
+          ...StyleSheet.absoluteFill,
           opacity: 0.77
         }}
         resizeMode='cover'

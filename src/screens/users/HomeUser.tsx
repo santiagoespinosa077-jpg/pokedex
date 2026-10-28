@@ -6,6 +6,8 @@ import { useUserApi } from '../../hooks/useUserApi';
 import { UserCard } from '../../components/UserCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import {BtnTouch} from '../../components/BtnTouch';
+import { FormUserData } from '../../hooks/useUserForm';
+
 
 export const HomeUser = () => {
 
@@ -28,6 +30,7 @@ export const HomeUser = () => {
     location: '',
     update: new Date()
   }
+
 
   return(
     <View

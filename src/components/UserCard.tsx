@@ -10,6 +10,7 @@ export const UserCard = ( { user }:Props ) => {
 
   const navigation = useNavigation();
 
+
   return(
     <TouchableOpacity
       onPress={ () => navigation.navigate('FormUser',{...user}) }

@@ -1,5 +1,8 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
 import { DrawerContentScrollView, DrawerContentComponentProps } from "@react-navigation/drawer";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+import { BtnTouch } from "./BtnTouch";
 
 interface BtnProps{
   navigate: () => void;
@@ -23,6 +26,7 @@ const BtnMenu = ( { navigate, text }:BtnProps ) => {
 }
 
 export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
+  const { authState, logout} = useContext( AuthContext );
   return (
     <DrawerContentScrollView>
       <View
@@ -36,18 +40,32 @@ export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
         >
           <Image
             style={ style.avatar }
-            source={{ uri: 'https://imgs.search.brave.com/tpTr632f2rcnYd6JMLvuDcy4SufWWQQAF3J8PMp-8mg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c29waXRhcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTcv/MTIvcGlyYXRhLWN1/bGlhY2FuLmpwZw' }}
+            source={
+              (authState.isLoggedIn) ?
+              {uri: `data:image/png;base64,${authState.avatar}`}
+              :
+              { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqMRKTwf-zYsaWB9QU5hXY8PBNLgQo61e5ML_g6P4NWA&s=10' }
+            }
           />
         </View>
         <Text
           style={ style.userText }
         >
-          User Cachas69
+          User: { authState.username }
         </Text>
+        {
+          (authState.isLoggedIn) && (
+            <BtnTouch
+              text="Cerrar sesiòn"
+              color="red"
+              onPress={ () => logout() }
+            />
+          )
+        }
         <View>
           <BtnMenu
             navigate={ () => navigation.navigate('StackNavigator') }
-            text="Screens"
+            text="Bolitas y palitos"
           />
           <BtnMenu
             navigate={ () => navigation.navigate('PokemonNavigator') }
@@ -59,19 +77,27 @@ export const DrawerMenu = ( { navigation }: DrawerContentComponentProps ) => {
           />
           <BtnMenu
             navigate={ () => navigation.navigate('ImagePickerScreen') }
-            text="Seleccionar Imagen"
+            text="Seleccionar Image"
           />
           <BtnMenu
             navigate={ () => navigation.navigate('LocationScreen') }
-            text="Ubicación"
+            text="Localización"
           />
           <BtnMenu
             navigate={ () => navigation.navigate('UserStackNavigator') }
             text="Gestión de Usuarios"
           />
           <BtnMenu
+            navigate={ () => navigation.navigate('LoginUser') }
+            text="LoginUser"
+          />
+          <BtnMenu
             navigate={ () => navigation.navigate('TareaStackNavigator') }
-            text="Gestión de tareas"
+            text="Tareas"
+          />
+          <BtnMenu
+            navigate={ () => navigation.navigate('ProductoStackNavigator') }
+            text="Productos"
           />
         </View>
       </View>
@@ -89,9 +115,9 @@ const style = StyleSheet.create({
     backgroundColor: 'gray',
     marginTop: 10,
     width: 200,
-    borderRadius: 15,
+    borderRadius: 20,
     borderColor: 'white',
-    borderWidth: 2
+    borderWidth: 5
   },
   avatar: {
     height: 200,
@@ -102,9 +128,9 @@ const style = StyleSheet.create({
   },
   borderAvatar: {
     height: 210,
-    width: 205,
+    width: 210,
     borderWidth: 30,
-    borderColor: '#4F86C6',
+    borderColor: 'violet',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useWindowDimensions } from "react-native";
 import { DrawerMenu } from "../components/DrawerMenu";
 import { FormScreen } from "../screens/FormScreen";
 import { ImagePickerScreen } from "../screens/ImagePickerScreen";
@@ -6,22 +8,27 @@ import { LocationScreen } from "../screens/LocationScreen";
 import { PokemonNavigator } from "./PokemonNavigator";
 import { StackNavigator } from "./StackNavigator";
 import { UserStackNavigator } from "./UserStackNavigator";
-import { useWindowDimensions } from "react-native";
-import {TareaStackNavigator} from './TareaStackNavigator'
-export type RootDrawerParams = {
-  StackNavigator:     undefined;
-  PokemonNavigator:   undefined;
-  FormScreen:         undefined;
-  ImagePickerScreen:  undefined;
-  LocationScreen:     undefined;
-  UserStackNavigator: undefined;
-  TareaStackNavigator:undefined;
+import { TareaStackNavigator } from "./TareaStackNavigator";
+import { ProductoStackNavigator } from "./ProductoStackNavigator";
+import { AuthContext } from "../context/AuthContext";
+import { LoginUser } from "../screens/users/LoginUser";
 
+
+export type RootDrawerParams = {
+  StackNavigator:         undefined;
+  PokemonNavigator:       undefined;
+  FormScreen:             undefined;
+  ImagePickerScreen:      undefined;
+  LocationScreen:         undefined;
+  UserStackNavigator:     undefined;
+  TareaStackNavigator:    undefined;
+  ProductoStackNavigator: undefined;
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
 
-export const DrawerNavigator = () => {
+// El menú lateral con todas las pantallas
+const Navigator = () => {
 
   const { width } = useWindowDimensions();
 
@@ -30,46 +37,52 @@ export const DrawerNavigator = () => {
       initialRouteName='UserStackNavigator'
       screenOptions={{
         headerShown: true,
-        drawerType:  width > 720 ? 'permanent' : 'front',
+        drawerType: width > 720 ? 'permanent' : 'front',
         drawerPosition: 'right',
-        overlayColor: '#14264F',
         drawerStyle: {
-          backgroundColor: 'rgba(0,0,0,0.8)',
           width: width * 0.75
         }
       }}
       drawerContent={ (props) => <DrawerMenu {...props}/> }
     >
-      <Drawer.Screen
-        name="StackNavigator"
-        component={StackNavigator}
-        color="#1F4E9C"
+      <Drawer.Screen 
+        name="StackNavigator" 
+        component={StackNavigator} 
       />
-      <Drawer.Screen
-        name="PokemonNavigator"
-        component={PokemonNavigator}
+      <Drawer.Screen 
+        name="PokemonNavigator" 
+        component={PokemonNavigator} 
       />
-      <Drawer.Screen
-        name="FormScreen"
-        component={FormScreen}
+      <Drawer.Screen 
+        name="FormScreen" 
+        component={FormScreen} 
       />
-      <Drawer.Screen
-        name="ImagePickerScreen"
-        component={ImagePickerScreen}
+      <Drawer.Screen 
+        name="ImagePickerScreen" 
+        component={ImagePickerScreen} 
       />
-      <Drawer.Screen
-        name="LocationScreen"
-        component={LocationScreen}
+      <Drawer.Screen 
+        name="LocationScreen" 
+        component={LocationScreen} 
       />
-      <Drawer.Screen
-        name="UserStackNavigator"
-        component={UserStackNavigator}
+      <Drawer.Screen 
+        name="UserStackNavigator" 
+        component={UserStackNavigator} 
       />
-      <Drawer.Screen
-        name="TareaStackNavigator"
-        component={TareaStackNavigator}
-        color="#1F4E9C"
+      <Drawer.Screen 
+        name="TareaStackNavigator" 
+        component={TareaStackNavigator} 
+      />
+      <Drawer.Screen 
+        name="ProductoStackNavigator" 
+        component={ProductoStackNavigator}  
       />
     </Drawer.Navigator>
   );
+}
+
+
+export const DrawerNavigator = () => {
+  const { authState } = useContext( AuthContext );
+  return ( authState.isLoggedIn ) ? <Navigator /> : <LoginUser />;
 }
