@@ -15,7 +15,7 @@ interface UseTareaApi {
 export const useTareaApi = (): UseTareaApi => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ listTarea, setListTarea ] = useState<TareaResponse[]>([]);
-  const urlApi = "http://192.168.213.161:3000/tarea";
+  const urlApi = "http://192.168.101.13:3000/tarea";
 
   const loadTarea = async () => {
     setIsLoading(true);

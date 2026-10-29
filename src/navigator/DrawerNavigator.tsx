@@ -12,6 +12,7 @@ import { TareaStackNavigator } from "./TareaStackNavigator";
 import { ProductoStackNavigator } from "./ProductoStackNavigator";
 import { AuthContext } from "../context/AuthContext";
 import { LoginUser } from "../screens/users/LoginUser";
+import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
 
 
 
@@ -24,6 +25,7 @@ export type RootDrawerParams = {
   UserStackNavigator:     undefined;
   TareaStackNavigator:    undefined;
   ProductoStackNavigator: undefined;
+  MantenimientoStackNavigator: undefined;
 
 }
 
@@ -78,6 +80,10 @@ const Navigator = () => {
       <Drawer.Screen 
         name="ProductoStackNavigator" 
         component={ProductoStackNavigator}  
+      />
+      <Drawer.Screen
+        name="MantenimientoStackNavigator"
+        component={MantenimientoStackNavigator}
       />
     </Drawer.Navigator>
   );

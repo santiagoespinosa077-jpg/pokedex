@@ -58,6 +58,7 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <BtnMenu navigate={() => navigation.navigate('LoginUser')} text="LoginUser" />
         <BtnMenu navigate={() => navigation.navigate('TareaStackNavigator')} text="Tareas" />
         <BtnMenu navigate={() => navigation.navigate('ProductoStackNavigator')} text="Productos" />
+        <BtnMenu navigate={() => navigation.navigate('MantenimientoStackNavigator')} text="Mantenimiento" />
       </View>
 
       {/* Cerrar sesión */}

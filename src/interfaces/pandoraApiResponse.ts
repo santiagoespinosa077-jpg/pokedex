@@ -47,7 +47,7 @@ export const nextState =(estado: EstadoProducto): EstadoProducto =>{
   return estados [(estados.indexOf(estado)+1)% estados.length]
 }
 
-export enum EstadoMan {
+export enum EstadoMantenimiento {
   pendiente  = "Pendiente",
   en_proceso = "En proceso",
   completado = "Completado",
@@ -68,9 +68,9 @@ export interface MantenimientoResponse {
   equipo:             string;
   descripcion:        string;
   prioridad:          Prioridad;
-  fecha:              string;   // formato AAAA-MM-DD
+  fecha:              string;   
   tecnico:            string;
-  estado:             EstadoMan;
+  estado:             EstadoMantenimiento;
   observaciones:      string;
   imagen1:            string;
   imagen2:            string;
@@ -78,12 +78,11 @@ export interface MantenimientoResponse {
   imagen4:            string;
 }
 
-// Mismo modelo que usa el formulario
-export type FormMantenimientoData = MantenimientoResponse;
+
 
 // Botones que cambian de valor: pasan al siguiente de la lista y vuelven al inicio
-export const siguienteEstadoMan = (estado: EstadoMan): EstadoMan => {
-  const estados = Object.values(EstadoMan);
+export const siguienteEstadoMan = (estado: EstadoMantenimiento): EstadoMantenimiento => {
+  const estados = Object.values(EstadoMantenimiento);
   return estados[(estados.indexOf(estado) + 1) % estados.length];
 };
 
@@ -92,36 +91,4 @@ export const siguientePrioridad = (prioridad: Prioridad): Prioridad => {
   return prioridades[(prioridades.indexOf(prioridad) + 1) % prioridades.length];
 };
 
-// Colores compartidos por la tarjeta y el formulario
-export const colorEstado: Record<EstadoMan, string> = {
-  [EstadoMan.pendiente]:  '#E8A317',
-  [EstadoMan.en_proceso]: '#3B82C4',
-  [EstadoMan.completado]: '#3FA672',
-};
-
-export const colorPrioridad: Record<Prioridad, string> = {
-  [Prioridad.alta]:   '#D9534F',
-  [Prioridad.normal]: '#8A97A6',
-  [Prioridad.baja]:   '#5B9E8F',
-};
-
-export const nuevaMantenimiento = (): MantenimientoResponse => ({
-  id_in: 0,
-  solicitante: '',
-  area: '',
-  ubicacion: '',
-  tipo_mantenimiento: '',
-  equipo: '',
-  descripcion: '',
-  prioridad: Prioridad.normal,
-  fecha: new Date().toISOString().slice(0, 10),
-  tecnico: '',
-  estado: EstadoMan.pendiente,
-  observaciones: '',
-  imagen1: '',
-  imagen2: '',
-  imagen3: '',
-  imagen4: '',
-});
-
-export type LoginReponse = UserResponse | false;
+export type LoginReponse = UserReponse | false;
