@@ -79,8 +79,6 @@ export interface MantenimientoResponse {
 }
 
 
-
-// Botones que cambian de valor: pasan al siguiente de la lista y vuelven al inicio
 export const siguienteEstadoMan = (estado: EstadoMantenimiento): EstadoMantenimiento => {
   const estados = Object.values(EstadoMantenimiento);
   return estados[(estados.indexOf(estado) + 1) % estados.length];
@@ -90,5 +88,41 @@ export const siguientePrioridad = (prioridad: Prioridad): Prioridad => {
   const prioridades = Object.values(Prioridad);
   return prioridades[(prioridades.indexOf(prioridad) + 1) % prioridades.length];
 };
+export enum Tipo{
+  residencial="Residencial",
+  comercial="Comercial",
+  industriales="Industriales",
+  rusticos="Rústicos"
+}
+export interface InmuebleResponse {
+  id_im:number;
+  titulo:string;
+  operacion:string;
+  tipo: Tipo;
+  precio:string;
+  direccion:string;
+  superficie:string;
+  habitaciones:string;
+  banos:string;
+  descripcion:string;
+  contacto:string;
+  imagen1:string;
+  imagen2:string;
+  imagen3:string;
+  imagen4:string;
+}
+export enum Operacion{
+  venta="Venta",
+  renta="Renta"
+}
+export const siguienteOperacion=(operacion: Operacion):Operacion=>{
+  const operaciones=Object.values(Operacion);
+  return operaciones[(operacion.indexOf(operacion)+1)%operacion.length];
+}
+export const siguienteTipo = (tipo: Tipo): Tipo => {
+  const tipos = Object.values(Tipo);
+  return tipos[(tipos.indexOf(tipo) + 1) % tipos.length];
+};
+
 
 export type LoginReponse = UserReponse | false;

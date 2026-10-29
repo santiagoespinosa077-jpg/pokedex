@@ -55,10 +55,10 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <BtnMenu navigate={() => navigation.navigate('ImagePickerScreen')} text="Seleccionar Image" />
         <BtnMenu navigate={() => navigation.navigate('LocationScreen')} text="Localización" />
         <BtnMenu navigate={() => navigation.navigate('UserStackNavigator')} text="Gestión de Usuarios" />
-        <BtnMenu navigate={() => navigation.navigate('LoginUser')} text="LoginUser" />
         <BtnMenu navigate={() => navigation.navigate('TareaStackNavigator')} text="Tareas" />
         <BtnMenu navigate={() => navigation.navigate('ProductoStackNavigator')} text="Productos" />
         <BtnMenu navigate={() => navigation.navigate('MantenimientoStackNavigator')} text="Mantenimiento" />
+        <BtnMenu navigate={() => navigation.navigate('InmuebleStackNavigator')} text="Inmueble" />
       </View>
 
       {/* Cerrar sesión */}

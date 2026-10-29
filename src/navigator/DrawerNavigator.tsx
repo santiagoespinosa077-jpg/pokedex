@@ -13,7 +13,7 @@ import { ProductoStackNavigator } from "./ProductoStackNavigator";
 import { AuthContext } from "../context/AuthContext";
 import { LoginUser } from "../screens/users/LoginUser";
 import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
-
+import { InmuebleStackNavigator } from "./InmuebleStackNavigator";
 
 
 export type RootDrawerParams = {
@@ -26,12 +26,12 @@ export type RootDrawerParams = {
   TareaStackNavigator:    undefined;
   ProductoStackNavigator: undefined;
   MantenimientoStackNavigator: undefined;
+  InmuebleStackNavigator: undefined;
 
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
 
-// El menú lateral con todas las pantallas
 const Navigator = () => {
 
   const { width } = useWindowDimensions();
@@ -84,6 +84,10 @@ const Navigator = () => {
       <Drawer.Screen
         name="MantenimientoStackNavigator"
         component={MantenimientoStackNavigator}
+      />
+      <Drawer.Screen
+        name="InmuebleStackNavigator"
+        component={InmuebleStackNavigator}
       />
     </Drawer.Navigator>
   );
