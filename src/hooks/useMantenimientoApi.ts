@@ -38,6 +38,7 @@ export const useMantenimientoApi = (): UseMantenimientoApi => {
             await cachasApi.post(urlApi, buildBody(data));
         } catch (e: any) {
             console.error('Error al crear:', e.response?.status, e.response?.data ?? e.message);
+            throw e;
         }
     };
 

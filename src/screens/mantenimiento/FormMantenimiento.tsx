@@ -53,7 +53,6 @@ interface SelectorProps<T extends string> {
   onSelect: (valor: T) => void;
 }
 
-// Todas las opciones visibles: la elegida se enciende con su color, las demás quedan en gris
 const Selector = <T extends string>({ label, opciones, seleccionado, onSelect }: SelectorProps<T>) => (
   <View style={styles.fieldGroup}>
     <Text style={styles.label}>{label}</Text>
@@ -116,8 +115,21 @@ export const FormMantenimiento = ( { route, navigation }: Props ) => {
       Alert.alert('Faltan campos', `Completa: ${faltantes.join(', ')}`);
       return;
     }
-    await handleSubmit();
-    navigation.popToTop();
+    try {
+      await handleSubmit();
+      navigation.popToTop();
+    } catch (e: any) {
+      Alert.alert('No se pudo guardar', 'Revisa los datos e inténtalo de nuevo.');
+    }
+  };
+
+  const eliminar = async () => {
+    try {
+      await handleDelete();
+      navigation.popToTop();
+    } catch (e: any) {
+      Alert.alert('No se pudo eliminar', 'Inténtalo de nuevo.');
+    }
   };
 
   const campo = (
@@ -170,7 +182,6 @@ export const FormMantenimiento = ( { route, navigation }: Props ) => {
           </Text>
         </View>
 
-        {/* Formulario */}
         <View style={styles.form}>
           {campo('SOLICITANTE', 'solicitante', 'Nombre del solicitante')}
           {campo('ÁREA', 'area', 'Escribe el área')}
@@ -210,25 +221,20 @@ export const FormMantenimiento = ( { route, navigation }: Props ) => {
             </View>
           </View>
 
-          {/* Estado y prioridad: solo al editar */}
-          {!esNuevo && (
-            <>
-              <Selector
-                label="ESTADO"
-                opciones={OPCIONES_ESTADO}
-                seleccionado={state.estado}
-                onSelect={(valor) => handleInputChange('estado', valor)}
-              />
-              <Selector
-                label="PRIORIDAD"
-                opciones={OPCIONES_PRIORIDAD}
-                seleccionado={state.prioridad}
-                onSelect={(valor) => handleInputChange('prioridad', valor)}
-              />
-            </>
-          )}
 
-          {/* Grupo de Botones de Acción */}
+          <Selector
+            label="ESTADO"
+            opciones={OPCIONES_ESTADO}
+            seleccionado={state.estado}
+            onSelect={(valor) => handleInputChange('estado', valor)}
+          />
+          <Selector
+            label="PRIORIDAD"
+            opciones={OPCIONES_PRIORIDAD}
+            seleccionado={state.prioridad}
+            onSelect={(valor) => handleInputChange('prioridad', valor)}
+          />
+
           <View style={styles.buttonGroup}>
             <BtnTouch
               text={esNuevo ? 'Crear solicitud' : 'Actualizar solicitud'}
@@ -245,10 +251,7 @@ export const FormMantenimiento = ( { route, navigation }: Props ) => {
                   color="transparent"
                   borderColor={C.peligro}
                   borderWidth={1}
-                  onPress={async () => {
-                    await handleDelete();
-                    navigation.popToTop();
-                  }}
+                  onPress={eliminar}
                 />
               </View>
             )}
