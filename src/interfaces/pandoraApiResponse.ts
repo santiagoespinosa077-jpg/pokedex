@@ -143,6 +143,10 @@ export interface BecaResponse{
   tipo: TipoBeca;
   justificacion:string;
   documentacion:string;
+  imagen1:string;
+  imagen2:string;
+  imagen3:string;
+  imagen4:string;
 }
 
 export const nextBeca=(actual: TipoBeca): TipoBeca=> {

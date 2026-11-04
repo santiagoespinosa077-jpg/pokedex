@@ -14,6 +14,10 @@ export interface FormBecaData {
   justificacion: string;
   documentacion: string;
   tipo:          TipoBeca;
+  imagen1: string;
+  imagen2: string;
+  imagen3: string;
+  imagen4:string;
 }
 
 interface UseBecaForm {
@@ -37,7 +41,11 @@ export const useBecaForm = (): UseBecaForm => {
     telefono:      '',
     justificacion: '',
     documentacion: '',
-    tipo:          TipoBeca.escolar
+    tipo:          TipoBeca.escolar,
+    imagen1:       '',
+    imagen2:       '',
+    imagen3:       '',
+    imagen4:       ''
   }
 
   type Action = { type: 'handleInputChange', payload: { fieldName: keyof FormBecaData, value: string | number } };

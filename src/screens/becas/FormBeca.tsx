@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import {
   View, Text, TextInput, ScrollView, StyleSheet, StatusBar,
-  TouchableOpacity, KeyboardTypeOptions,
+  TouchableOpacity, KeyboardTypeOptions, Image,
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { BtnTouch } from '../../components/BtnTouch';
 import { Fab } from '../../components/Fab';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -32,7 +33,6 @@ interface Campo {
   multiline?:   boolean;
 }
 
-// Se define una sola vez para no repetir el mismo bloque 9 veces
 const campos: Campo[] = [
   { key: 'nombre',        label: 'NOMBRE COMPLETO', placeholder: 'Escribe tu nombre' },
   { key: 'matricula',     label: 'MATRÍCULA',       placeholder: 'Escribe tu matrícula' },
@@ -45,6 +45,9 @@ const campos: Campo[] = [
   { key: 'documentacion', label: 'DOCUMENTACIÓN',   placeholder: 'Nombre o ruta del documento' },
 ];
 
+const IMAGENES = ['imagen1', 'imagen2', 'imagen3', 'imagen4'] as const;
+type CampoImagen = typeof IMAGENES[number];
+
 export const FormBeca = ( { route, navigation }: Props ) => {
 
   const { state, handleInputChange, handleSubmit, handleDelete } = useBecaForm();
@@ -52,9 +55,27 @@ export const FormBeca = ( { route, navigation }: Props ) => {
   useEffect(() => {
     const beca = route.params;
     (Object.keys(beca) as (keyof FormBecaData)[]).forEach( campo => {
-      handleInputChange(campo, beca[campo]);
+      handleInputChange(campo, beca[campo] ?? '');
     });
   }, []);
+
+  const totalFotos = IMAGENES.filter( campo => state[campo] ).length;
+
+  const elegirImagen = async ( campo: CampoImagen ) => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      quality: 0.4,
+      base64: true,
+      allowsEditing: true,
+      aspect: [1, 1],
+    });
+
+    if (!result.canceled && result.assets[0].base64) {
+      handleInputChange(campo, `data:image/jpeg;base64,${result.assets[0].base64}`);
+    }
+  };
+
+  const quitarImagen = ( campo: CampoImagen ) => handleInputChange(campo, '');
 
   return (
     <View style={styles.root}>
@@ -104,6 +125,57 @@ export const FormBeca = ( { route, navigation }: Props ) => {
               />
             </View>
           ))}
+
+          {/* Fotos */}
+          <View style={styles.fieldGroup}>
+            <View style={styles.fotosHeader}>
+              <Text style={[styles.label, styles.labelSinMargen]}>FOTOS</Text>
+              <View style={styles.contador}>
+                <Text style={styles.contadorText}>{totalFotos}/4</Text>
+              </View>
+            </View>
+            <Text style={styles.hint}>Toca un recuadro para elegir una foto</Text>
+
+            <View style={styles.imgGrid}>
+              {IMAGENES.map( (campo, i) => {
+                const uri = state[campo];
+                return (
+                  <TouchableOpacity
+                    key={campo}
+                    activeOpacity={0.85}
+                    style={[styles.imgSlot, uri ? styles.imgSlotLleno : styles.imgSlotVacio]}
+                    onPress={() => elegirImagen(campo)}
+                  >
+                    {uri ? (
+                      <>
+                        <Image source={{ uri }} style={styles.imgPreview} resizeMode="cover" />
+
+                        <View style={styles.imgEtiqueta}>
+                          <Text style={styles.imgEtiquetaText}>FOTO {i + 1}</Text>
+                        </View>
+
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          style={styles.imgQuitar}
+                          onPress={() => quitarImagen(campo)}
+                          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                        >
+                          <Text style={styles.imgQuitarText}>✕</Text>
+                        </TouchableOpacity>
+                      </>
+                    ) : (
+                      <View style={styles.imgVacioContenido}>
+                        <View style={styles.imgPlusCirculo}>
+                          <Text style={styles.imgPlus}>+</Text>
+                        </View>
+                        <Text style={styles.imgVacioText}>Foto {i + 1}</Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
 
           {/* Tipo de beca */}
           <View style={styles.fieldGroup}>
@@ -205,6 +277,9 @@ const styles = StyleSheet.create({
     letterSpacing: 1.2,
     marginBottom: 8,
   },
+  labelSinMargen: {
+    marginBottom: 0,
+  },
   input: {
     backgroundColor: C.superficieInput,
     borderRadius: 12,
@@ -220,6 +295,117 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 14,
   },
+
+  /* Fotos */
+  fotosHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  contador: {
+    backgroundColor: C.tagBg,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  contadorText: {
+    color: C.acento,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+  hint: {
+    color: C.placeholder,
+    fontSize: 12,
+    marginTop: 4,
+    marginBottom: 12,
+  },
+  imgGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    rowGap: 12,
+  },
+  imgSlot: {
+    width: '48%',
+    aspectRatio: 1,
+    borderRadius: 16,
+    overflow: 'hidden',
+    backgroundColor: C.superficieInput,
+  },
+  imgSlotVacio: {
+    borderWidth: 1.5,
+    borderStyle: 'dashed',
+    borderColor: 'rgba(99, 102, 241, 0.45)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imgSlotLleno: {
+    borderWidth: 1,
+    borderColor: C.bordeInput,
+  },
+  imgVacioContenido: {
+    alignItems: 'center',
+  },
+  imgPlusCirculo: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: C.tagBg,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  imgPlus: {
+    color: C.acento,
+    fontSize: 26,
+    fontWeight: '300',
+    lineHeight: 30,
+  },
+  imgVacioText: {
+    color: C.textoSecundario,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  imgPreview: {
+    width: '100%',
+    height: '100%',
+  },
+  imgEtiqueta: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(9, 13, 22, 0.7)',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+  },
+  imgEtiquetaText: {
+    color: C.textoPrincipal,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+  },
+  imgQuitar: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'rgba(9, 13, 22, 0.75)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imgQuitarText: {
+    color: C.textoPrincipal,
+    fontSize: 12,
+    fontWeight: '700',
+  },
+
+  /* Tipo de beca */
   tipoRow: {
     flexDirection: 'row',
     gap: 10,

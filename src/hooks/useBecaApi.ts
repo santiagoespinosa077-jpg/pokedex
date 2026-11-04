@@ -40,7 +40,11 @@ export const useBecaApi = (): UseBecaApi => {
       telefono:      data.telefono,
       justificacion: data.justificacion,
       documentacion: data.documentacion,
-      tipo:          data.tipo
+      tipo:          data.tipo,
+      imagen1:       data.imagen1,
+      imagen2:       data.imagen2,
+      imagen3:       data.imagen3,
+      imagen4:       data.imagen4
     }
     try {
       await cachasApi.post( urlApi, dataBody );
@@ -60,7 +64,11 @@ export const useBecaApi = (): UseBecaApi => {
       telefono:      data.telefono,
       justificacion: data.justificacion,
       documentacion: data.documentacion,
-      tipo:          data.tipo
+      tipo:          data.tipo,
+      imagen1:       data.imagen1,
+      imagen2:       data.imagen2,
+      imagen3:       data.imagen3,
+      imagen4:       data.imagen4
     }
     try {
       await cachasApi.patch( `${urlApi}/${data.id_beca}`, dataBody );
