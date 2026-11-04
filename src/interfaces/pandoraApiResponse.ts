@@ -125,4 +125,29 @@ export const siguienteTipo = (tipo: Tipo): Tipo => {
 };
 
 
+export enum TipoBeca{
+  escolar="Escolarizada",
+  manutencion="Manutencion"
+}
+
+export interface BecaResponse{
+
+  id_beca:number;
+  nombre:string;
+  matricula: string;
+  carrera:string;
+  promedio:string;
+  semestre:string;
+  correo:string;
+  telefono:string;
+  tipo: TipoBeca;
+  justificacion:string;
+  documentacion:string;
+}
+
+export const nextBeca=(actual: TipoBeca): TipoBeca=> {
+  const tipos=Object.values(TipoBeca);
+  return tipos[(tipos.indexOf(actual)+1)% tipos.length];
+}
+
 export type LoginReponse = UserReponse | false;

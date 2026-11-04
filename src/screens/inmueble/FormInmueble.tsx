@@ -1,8 +1,5 @@
 import { useEffect, useRef } from 'react';
-import {
-  View, Text, TextInput, TextInputProps, ScrollView, Image,
-  StyleSheet, StatusBar, TouchableOpacity, Alert, StyleProp, ViewStyle,
-} from 'react-native';
+import {View, Text, TextInput, TextInputProps, ScrollView, Image,StyleSheet, StatusBar, TouchableOpacity, Alert, StyleProp, ViewStyle,} from 'react-native';
 import { BtnTouch } from '../../components/BtnTouch';
 import { Fab } from '../../components/Fab';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -217,8 +214,6 @@ export const FormInmueble = ( { route, navigation }: Props ) => {
               : 'Edita la información del inmueble'}
           </Text>
         </View>
-
-        {/* Formulario */}
         <View style={styles.form}>
           {campo('TÍTULO', 'titulo', 'Casa en el centro')}
           {campo('DIRECCIÓN', 'direccion', 'Calle, número, colonia')}
