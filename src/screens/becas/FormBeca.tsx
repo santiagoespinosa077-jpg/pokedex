@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-import {
-  View, Text, TextInput, ScrollView, StyleSheet, StatusBar,
-  TouchableOpacity, KeyboardTypeOptions, Image,
-} from 'react-native';
+import {View, Text, TextInput, ScrollView, StyleSheet, StatusBar,TouchableOpacity, KeyboardTypeOptions, Image,} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { BtnTouch } from '../../components/BtnTouch';
 import { Fab } from '../../components/Fab';
@@ -96,7 +93,6 @@ export const FormBeca = ( { route, navigation }: Props ) => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Encabezado */}
         <View style={styles.header}>
           <Text style={styles.title}>
             {state.id_beca === 0 ? 'Nueva beca' : 'Editar beca'}
@@ -106,7 +102,6 @@ export const FormBeca = ( { route, navigation }: Props ) => {
           </Text>
         </View>
 
-        {/* Formulario */}
         <View style={styles.form}>
 
           {campos.map( campo => (
@@ -126,7 +121,6 @@ export const FormBeca = ( { route, navigation }: Props ) => {
             </View>
           ))}
 
-          {/* Fotos */}
           <View style={styles.fieldGroup}>
             <View style={styles.fotosHeader}>
               <Text style={[styles.label, styles.labelSinMargen]}>FOTOS</Text>
@@ -177,7 +171,6 @@ export const FormBeca = ( { route, navigation }: Props ) => {
             </View>
           </View>
 
-          {/* Tipo de beca */}
           <View style={styles.fieldGroup}>
             <Text style={styles.label}>TIPO DE BECA</Text>
             <View style={styles.tipoRow}>
@@ -199,7 +192,6 @@ export const FormBeca = ( { route, navigation }: Props ) => {
             </View>
           </View>
 
-          {/* Grupo de Botones de Acción */}
           <View style={styles.buttonGroup}>
             <BtnTouch
               text={state.id_beca === 0 ? 'Crear beca' : 'Actualizar beca'}
@@ -438,4 +430,4 @@ const styles = StyleSheet.create({
   actionMargin: {
     marginTop: 12,
   }
-});
+});z

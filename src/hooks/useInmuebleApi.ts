@@ -11,7 +11,7 @@ interface UseInmuebleApi {
     updateInmueble: (data: FormInmuebleData) => Promise<void>;
     deleteInmueble: (data: FormInmuebleData) => Promise<void>;
 }
-const urlApi = "http://192.168.101.13:3000/inmueble";
+const urlApi = "http://192.168.178.161:3000/inmueble";
 
 const buildBody = ({ id_im, ...body }: FormInmuebleData) => body;
 

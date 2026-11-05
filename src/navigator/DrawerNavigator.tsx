@@ -15,6 +15,7 @@ import { LoginUser } from "../screens/users/LoginUser";
 import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
 import { InmuebleStackNavigator } from "./InmuebleStackNavigator";
 import {BecaStackNavigator} from "./BecaStackNavigator";
+import {DataReponseScreen} from "../screens/DataReponseScreen";
 
 
 export type RootDrawerParams = {
@@ -29,6 +30,7 @@ export type RootDrawerParams = {
   MantenimientoStackNavigator: undefined;
   InmuebleStackNavigator: undefined;
   BecaStackNavigator: undefined;
+  DataReponseScreen: undefined;
 
 }
 
@@ -95,12 +97,15 @@ const Navigator = () => {
         name="BecaStackNavigator"
         component={BecaStackNavigator}
       />
+      <Drawer.Screen
+        name="DataReponseScreen"
+        component={DataReponseScreen}
+      />
     </Drawer.Navigator>
   );
 }
 
 
 export const DrawerNavigator = () => {
-  const { authState } = useContext( AuthContext );
-  return ( authState.isLoggedIn ) ? <Navigator /> : <LoginUser />;
+  return <Navigator />;
 }
