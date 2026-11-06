@@ -15,7 +15,7 @@ import { LoginUser } from "../screens/users/LoginUser";
 import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
 import { InmuebleStackNavigator } from "./InmuebleStackNavigator";
 import {BecaStackNavigator} from "./BecaStackNavigator";
-import {DataReponseScreen} from "../screens/DataReponseScreen";
+import {DataResponseScreen} from "../screens/DataResponseScreen";
 
 
 export type RootDrawerParams = {
@@ -98,14 +98,13 @@ const Navigator = () => {
         component={BecaStackNavigator}
       />
       <Drawer.Screen
-        name="DataReponseScreen"
-        component={DataReponseScreen}
+        name="DataResponseScreen"
+        component={DataResponseScreen}
       />
     </Drawer.Navigator>
   );
 }
-
-
 export const DrawerNavigator = () => {
+  
   return <Navigator />;
 }

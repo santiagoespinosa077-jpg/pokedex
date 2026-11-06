@@ -27,7 +27,6 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
 
   return (
     <DrawerContentScrollView contentContainerStyle={style.container}>
-      {/* Cabecera */}
       <View style={style.header}>
         <View style={style.avatarWrapper}>
           <Image
@@ -57,10 +56,9 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <BtnMenu navigate={() => navigation.navigate('UserStackNavigator')} text="Gestión de Usuarios" />
         <BtnMenu navigate={() => navigation.navigate('TareaStackNavigator')} text="Tareas" />
         <BtnMenu navigate={() => navigation.navigate('ProductoStackNavigator')} text="Productos" />
-        <BtnMenu navigate={() => navigation.navigate('DataReponseScreen')} text="graficos" />
+        <BtnMenu navigate={() => navigation.navigate('DataResponseScreen')} text="graficos" />
       </View>
-
-      {/* Cerrar sesión */}
+      
       {authState.isLoggedIn && (
         <View style={style.footer}>
           <BtnTouch

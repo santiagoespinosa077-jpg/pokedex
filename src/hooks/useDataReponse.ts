@@ -6,11 +6,11 @@ export const useDataResponse = () => {
 
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ data, setData ] = useState<DataResponse>();
-  const urlApi = "http://192.168.178.161:3000/sensors/consultas/data"
+  const urlApi = "http://192.168.101.13:3000/sensor/consultas/data"
 
   const loadData = async () => {
     setIsLoading(true);
-    const response = await pandoraApi.get<DataResponse>(urlApi);
+    const response = await cachasApi.get<DataResponse>(urlApi);
     setData( response.data );
     setIsLoading(false);
   }

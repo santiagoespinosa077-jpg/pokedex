@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { View, Text, ScrollView, StyleSheet, useWindowDimensions} from 'react-native';
+import { View, Text, ScrollView, StyleSheet, useWindowDimensions, RefreshControl} from 'react-native';
 import { useDataResponse } from '../hooks/useDataReponse';
-//import { BarChart, LineChart } from 'react-native-gifted-charts';
+import { BarChart, LineChart } from 'react-native-gifted-charts';
 import { appTheme } from '../theme/appTheme';
 
 const C = {
@@ -71,7 +71,7 @@ export const DataResponseScreen = () => {
     );
   }
 
-  const Stat = ({ label, valor, color }: {
+  const Stat = ({ label, valor, color}: {
     label: string;
     valor: number;
     color: string;
@@ -94,7 +94,7 @@ export const DataResponseScreen = () => {
             backgroundColor: color
           }}
         >
-          { Number(valor).toFixed(1) } C
+          { Number(valor).toFixed(1) } 
         </Text>
       </View>
     );
@@ -137,6 +137,7 @@ export const DataResponseScreen = () => {
       </View>
     );
   }
+ 
 
   const { total, estadisticas }= data;
 
@@ -172,6 +173,22 @@ export const DataResponseScreen = () => {
     { value: data.anteayer.length, color: C.morado, label: 'Antier' },
   ];
 
+
+    const hoi= data.hoy.map(a=>({
+      value: Number(a.temperatura_celcius),
+      label: hora(a.fecha),
+    }));
+
+    const aier= data.ayer.map(a =>({
+      value: Number(a.temperatura_celcius),
+      label: hora(a.fecha),
+    }));
+
+    const antier= data.anteayer.map(a=>({
+      value: Number(a.temperatura_celcius),
+      label: hora(a.fecha),
+    }));
+
   return(
     <ScrollView
       scrollEnabled={ true }
@@ -180,6 +197,15 @@ export const DataResponseScreen = () => {
         flexGrow: 1,
         padding: 20
       }}
+      refreshControl={
+        <RefreshControl
+          refreshing={isLoading}
+          onRefresh={loadData}
+          tintColor={C.frio}
+          colors={[C.frio]}
+          progressBackgroundColor={C.tarjeta}
+        />
+      }
     >
       <View>
         <Text style={style.header}>Monitor del sensor</Text>
@@ -202,6 +228,59 @@ export const DataResponseScreen = () => {
       >
         <GraficoLinea datos={distancia} color={C.verde} />
       </Tarjeta>
+
+
+      <Tarjeta
+        titulo="Días Frios"
+        subtitulo="Recopilación de los 10 días más frios"
+      >
+        <GraficoLinea datos={diasFrios} color={C.verde}/>
+      </Tarjeta>
+
+      <Tarjeta
+        titulo="Días calurosos"
+        subtitulo="Recopilación de los 10 días más calurosos"
+      >
+        <GraficoLinea datos={diasCalurosos} color={C.calor}/>
+      </Tarjeta>
+
+      <Tarjeta
+        titulo="Top"
+        subtitulo="Top Temperaturas"
+      >
+        <GraficoLinea datos={top} color={C.top}/>
+      </Tarjeta>
+
+      <View style={style.fila}>
+        <Stat label="Lecturas Hoy" valor={lecturasPorDia[0].value} color={C.verde}/>
+      </View>
+      <Tarjeta
+        titulo="Hoy"
+        subtitulo="Temperatura Hoy"
+      >
+        <GraficoLinea datos={hoi} color={C.verde}/>
+      </Tarjeta>
+
+      <View style={style.fila}>
+        <Stat label="Lecturas Ayer" valor={lecturasPorDia[1].value} color={C.morado}/>
+      </View>
+      <Tarjeta
+        titulo="Ayer"
+        subtitulo="Temperatura Ayer"
+      >
+        <GraficoLinea datos={aier} color={C.morado}/>
+      </Tarjeta>
+
+      <View style={style.fila}>
+        <Stat label="Lecturas Anteayer" valor={lecturasPorDia[2].value} color={C.frio}/>
+      </View>
+      <Tarjeta
+        titulo="Anteayer"
+        subtitulo="Temperatura Anteayer"
+      >
+        <GraficoLinea datos={antier} color={C.frio}/>
+      </Tarjeta>
+
     </ScrollView> 
   );
 }
@@ -211,7 +290,7 @@ const style = StyleSheet.create({
   centro: { justifyContent: 'center', alignItems: 'center' },
   header: { color: C.texto, fontSize: 13 },
   sub: { color: C.texto, fontSize: 26, fontWeight: "bold" },
-  fila: { flexDirection: 'row', gap: 10 },
+  fila: { flexDirection: 'row', gap: 10, padding: 5 },
   stat: { flex: 1, backgroundColor: C.tarjeta, borderRadius: 12, borderTopWidth: 3, padding: 12 },
   statValor: { fontSize: 20, fontWeight: 'bold', marginTop: 4 },
   tarjeta: {
@@ -220,7 +299,8 @@ const style = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
-    padding: 16
+    padding: 16,
+    marginBottom: 15
   },
   titulo: { color: C.texto, fontSize: 17, fontWeight: 'bold' },
   leyenda: { flexDirection: 'row', textAlign: 'center', gap: 6 },
