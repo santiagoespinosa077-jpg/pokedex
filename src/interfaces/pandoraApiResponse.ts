@@ -190,3 +190,80 @@ export interface Estadisticas {
     temp_minimo:   number;
     dist_promedio: number;
 }
+
+
+export interface ClienteDataResponse {
+  total: number;
+  estado: Cliente[];
+  estados: TotalPorEstado[];
+  clientes2026: Cliente[];
+  clientesPorCorreo: Cliente[];
+  uno: TotalPorCiudad[];
+  ultimo: Cliente[];
+}
+
+export interface Cliente {
+  id_cliente: number;
+  nombre: string;
+  correo: string;
+  ciudad: string;
+  estado: string;
+  fecha_registro: Date;
+  
+}
+
+export interface TotalPorEstado {
+  total: number;
+  estado: string;
+}
+
+export interface TotalPorCiudad {
+  total: number;
+  ciudad: string;
+}
+
+export interface Alumno {
+  id_alumno: number;
+  nombre: string;
+  apellido: string;
+  grado: number;
+  grupo: string;
+  fecha_nacimiento: Date;
+  promedio: number;
+  activo: boolean;
+}
+
+export interface PromedioGeneral {
+  total: number;
+  promedio_general: number;
+}
+
+export interface PromedioGradoGrupo {
+  grado: number;
+  grupo: string;
+  promedio_por_grado_y_grupo: number;
+}
+
+export interface MejorPromedio {
+  nombre: string;
+  promedio: number;
+}
+
+export interface PromedioMayorGrado {
+  nombre: string;
+  grado: number;
+  promedio_grado: number;
+}
+
+export interface AlumnoDataResponse {
+  total: number;                          
+  activos: number;                                
+  segundoGrado: Alumno[];                   
+  promedioGeneral: PromedioGeneral;                
+  promedio_Por_Grado_Y_Grupo: PromedioGradoGrupo[];
+  mejoresPromedios: MejorPromedio[];               
+  promedioMenor: Alumno[];                         
+  nacidos2012: Alumno[];                           
+  promedioMayorGrado: PromedioMayorGrado[];        
+}
+

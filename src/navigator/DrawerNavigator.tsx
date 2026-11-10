@@ -16,6 +16,8 @@ import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
 import { InmuebleStackNavigator } from "./InmuebleStackNavigator";
 import {BecaStackNavigator} from "./BecaStackNavigator";
 import {DataResponseScreen} from "../screens/DataResponseScreen";
+import {AlumnoDataScreen} from "../screens/AlumnoDataScreen";
+import {ClienteDataScreen} from "../screens/ClienteDataScreen";
 
 
 export type RootDrawerParams = {
@@ -31,6 +33,8 @@ export type RootDrawerParams = {
   InmuebleStackNavigator: undefined;
   BecaStackNavigator: undefined;
   DataReponseScreen: undefined;
+  AlumnoDataScreen: undefined;
+  ClienteDataScreen: undefined;
 
 }
 
@@ -100,6 +104,14 @@ const Navigator = () => {
       <Drawer.Screen
         name="DataResponseScreen"
         component={DataResponseScreen}
+      />
+      <Drawer.Screen
+        name="AlumnoDataScreen"
+        component={AlumnoDataScreen}
+      />
+      <Drawer.Screen
+        name="ClienteDataScreen"
+        component={ClienteDataScreen}
       />
     </Drawer.Navigator>
   );
