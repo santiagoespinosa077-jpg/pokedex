@@ -10,31 +10,28 @@ import { StackNavigator } from "./StackNavigator";
 import { UserStackNavigator } from "./UserStackNavigator";
 import { TareaStackNavigator } from "./TareaStackNavigator";
 import { ProductoStackNavigator } from "./ProductoStackNavigator";
-import { AuthContext } from "../context/AuthContext";
-import { LoginUser } from "../screens/users/LoginUser";
-import { MantenimientoStackNavigator } from "./MantenimientoStackNavigator";
-import { InmuebleStackNavigator } from "./InmuebleStackNavigator";
-import {BecaStackNavigator} from "./BecaStackNavigator";
-import {DataResponseScreen} from "../screens/DataResponseScreen";
-import {AlumnoDataScreen} from "../screens/AlumnoDataScreen";
-import {ClienteDataScreen} from "../screens/ClienteDataScreen";
+import { DataResponseScreen } from "../screens/DataResponseScreen";
+import { AlumnoDataScreen } from "../screens/AlumnoDataScreen";
+import { ClienteDataScreen } from "../screens/ClienteDataScreen";
+import { EmpleadoDataScreen } from "../screens/EmpleadoDataScreen";
+import { CalificacionDataResponse } from "../interfaces/pandoraApiResponse";
+import { CalificacionDataScreen } from "../screens/CalificacionDataScreen";
 
 
 export type RootDrawerParams = {
-  StackNavigator:         undefined;
-  PokemonNavigator:       undefined;
-  FormScreen:             undefined;
-  ImagePickerScreen:      undefined;
-  LocationScreen:         undefined;
-  UserStackNavigator:     undefined;
-  TareaStackNavigator:    undefined;
+  StackNavigator: undefined;
+  PokemonNavigator: undefined;
+  FormScreen: undefined;
+  ImagePickerScreen: undefined;
+  LocationScreen: undefined;
+  UserStackNavigator: undefined;
+  TareaStackNavigator: undefined;
   ProductoStackNavigator: undefined;
-  MantenimientoStackNavigator: undefined;
-  InmuebleStackNavigator: undefined;
-  BecaStackNavigator: undefined;
   DataReponseScreen: undefined;
   AlumnoDataScreen: undefined;
   ClienteDataScreen: undefined;
+  EmpleadoDataScreen: undefined;
+  CalificacionDataScreen: undefined;
 
 }
 
@@ -55,51 +52,39 @@ const Navigator = () => {
           width: width * 0.75
         }
       }}
-      drawerContent={ (props) => <DrawerMenu {...props}/> }
+      drawerContent={(props) => <DrawerMenu {...props} />}
     >
-      <Drawer.Screen 
-        name="StackNavigator" 
-        component={StackNavigator} 
-      />
-      <Drawer.Screen 
-        name="PokemonNavigator" 
-        component={PokemonNavigator} 
-      />
-      <Drawer.Screen 
-        name="FormScreen" 
-        component={FormScreen} 
-      />
-      <Drawer.Screen 
-        name="ImagePickerScreen" 
-        component={ImagePickerScreen} 
-      />
-      <Drawer.Screen 
-        name="LocationScreen" 
-        component={LocationScreen} 
-      />
-      <Drawer.Screen 
-        name="UserStackNavigator" 
-        component={UserStackNavigator} 
-      />
-      <Drawer.Screen 
-        name="TareaStackNavigator" 
-        component={TareaStackNavigator} 
-      />
-      <Drawer.Screen 
-        name="ProductoStackNavigator" 
-        component={ProductoStackNavigator}  
+      <Drawer.Screen
+        name="StackNavigator"
+        component={StackNavigator}
       />
       <Drawer.Screen
-        name="MantenimientoStackNavigator"
-        component={MantenimientoStackNavigator}
+        name="PokemonNavigator"
+        component={PokemonNavigator}
       />
       <Drawer.Screen
-        name="InmuebleStackNavigator"
-        component={InmuebleStackNavigator}
+        name="FormScreen"
+        component={FormScreen}
       />
       <Drawer.Screen
-        name="BecaStackNavigator"
-        component={BecaStackNavigator}
+        name="ImagePickerScreen"
+        component={ImagePickerScreen}
+      />
+      <Drawer.Screen
+        name="LocationScreen"
+        component={LocationScreen}
+      />
+      <Drawer.Screen
+        name="UserStackNavigator"
+        component={UserStackNavigator}
+      />
+      <Drawer.Screen
+        name="TareaStackNavigator"
+        component={TareaStackNavigator}
+      />
+      <Drawer.Screen
+        name="ProductoStackNavigator"
+        component={ProductoStackNavigator}
       />
       <Drawer.Screen
         name="DataResponseScreen"
@@ -113,10 +98,19 @@ const Navigator = () => {
         name="ClienteDataScreen"
         component={ClienteDataScreen}
       />
+      <Drawer.Screen
+        name="EmpleadoDataScreen"
+        component={EmpleadoDataScreen}
+      />
+      <Drawer.Screen
+        name="CalificacionDataScreen"
+        component={CalificacionDataScreen}
+      />
+
     </Drawer.Navigator>
   );
 }
 export const DrawerNavigator = () => {
-  
+
   return <Navigator />;
 }

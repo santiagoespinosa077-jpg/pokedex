@@ -130,10 +130,9 @@ export const ClienteDataScreen = () => {
 
   const { total } = data;
 
-  // Solo los 8 con más clientes, para que las etiquetas quepan
   const porEstado = [...data.estados]
     .sort((a, b) => Number(b.total) - Number(a.total))
-    .slice(0, 8)
+    .slice(0, 10)
     .map(e => ({
       value: Number(e.total),
       label: e.estado.slice(0, 6),
@@ -177,7 +176,7 @@ export const ClienteDataScreen = () => {
         <Stat label="Ciudades con +1 cliente" valor={data.uno.length} color={C.morado} decimales={0} />
       </View>
 
-      <Tarjeta titulo="Clientes por estado" subtitulo="Los 8 estados con más clientes">
+      <Tarjeta titulo="Clientes por estado" subtitulo="Los 10 estados con más clientes">
         <GraficoBarras datos={porEstado} color={C.frio} />
       </Tarjeta>
 
