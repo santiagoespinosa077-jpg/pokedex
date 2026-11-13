@@ -1,19 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { cachasApi } from "../api/cachasApi";
 import { DataResponse } from "../interfaces/pandoraApiResponse";
+import { useApiUrl } from "./useApiUrl";
 
 export const useDataResponse = () => {
-
+  const {apiUrl} = useApiUrl();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ data, setData ] = useState<DataResponse>();
-  const urlApi = "http://192.168.101.13:3000/sensor/consultas/data"
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setIsLoading(true);
-    const response = await cachasApi.get<DataResponse>(urlApi);
-    setData( response.data );
-    setIsLoading(false);
-  }
+    try {
+      const resp = await fetch(`${apiUrl}/sensor/consultas/data`);
+      if (!resp.ok) throw new Error(`Error ${resp.status}`);
+      const json: DataResponse = await resp.json();
+      setData(json);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [apiUrl]);
 
   useEffect( () => {
     loadData();

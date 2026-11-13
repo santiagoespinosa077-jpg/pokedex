@@ -15,6 +15,7 @@ import { AlumnoDataScreen } from "../screens/AlumnoDataScreen";
 import { ClienteDataScreen } from "../screens/ClienteDataScreen";
 import { EmpleadoDataScreen } from "../screens/EmpleadoDataScreen";
 import { CalificacionDataScreen } from "../screens/CalificacionDataScreen";
+import { ConfigServidorScreen } from "../screens/ConfigServidorScreen";
 
 
 export type RootDrawerParams = {
@@ -31,6 +32,7 @@ export type RootDrawerParams = {
   ClienteDataScreen: undefined;
   EmpleadoDataScreen: undefined;
   CalificacionDataScreen: undefined;
+  ConfigServerScreen: undefined;
 
 }
 
@@ -105,6 +107,11 @@ const Navigator = () => {
         name="CalificacionDataScreen"
         component={CalificacionDataScreen}
       />
+       <Drawer.Screen
+        name="ConfigServerScreen"
+        component={ConfigServidorScreen}
+      />
+
 
     </Drawer.Navigator>
   );
