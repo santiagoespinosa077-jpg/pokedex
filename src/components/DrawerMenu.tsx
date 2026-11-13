@@ -59,6 +59,8 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <BtnMenu navigate={() => navigation.navigate('DataResponseScreen')} text="Graficos" />
         <BtnMenu navigate={() => navigation.navigate('AlumnoDataScreen')} text="Alumno Data" />
         <BtnMenu navigate={() => navigation.navigate('ConfigServerScreen')} text="Acces ip" />
+        <BtnMenu navigate={() => navigation.navigate('ClienteDataScreen')} text="Clientes Data" />
+        
       </View>
       
       {authState.isLoggedIn && (
