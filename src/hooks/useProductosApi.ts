@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
+import { useApiUrl } from "./useApiUrl";
 import { cachasApi} from '../api/cachasApi';
 import { ProductosResponse } from '../interfaces/pandoraApiResponse';
 import type { FormProductoData } from './useProductoForm';
@@ -13,21 +14,27 @@ interface UseProductosApi {
 }
 
 export const useProductosApi =():UseProductosApi=>{
+  const { apiUrl } = useApiUrl();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listProducto,setListProducto]=useState<ProductosResponse[]>([]);
-  const urlApi= "http://192.168.101.13:3000/producto";
+  const urlApi = `${apiUrl}/producto`;
 
-const loadProducto = async()=>{
+const loadProducto = useCallback(async()=>{
   setIsLoading(true);
   try {
-      const response = await cachasApi.get<ProductosResponse[]>(urlApi);
-      setListProducto( response.data );
+      const response = await fetch(urlApi);
+      if (!response.ok){
+         console.log('Error al cargar:', response.status, await response.text());
+        return;
+      }
+      const data: ProductosResponse[] = await response.json()
+      setListProducto( data );
     } catch (e: any) {
       console.log('Error al cargar:', e.response?.status, e.response?.data ?? e.message);
     } finally {
       setIsLoading(false);
     }
-}
+},[urlApi]);
 
   const createProducto = async ( data: FormProductoData ) => {
     const dataBody = {

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { cachasApi } from "../api/cachasApi";
 import { UserReponse } from "../interfaces/pandoraApiResponse";
 import { FormUserData } from "./useUserForm";
+import { useApiUrl } from "./useApiUrl";
 
 interface UseUserApi{
   isLoading:  boolean;
@@ -13,20 +14,22 @@ interface UseUserApi{
 }
 
 export const useUserApi = (): UseUserApi => {
+  const { apiUrl } = useApiUrl();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ listUser, setListUser ] = useState<UserReponse[]>([]);
-  const urlApi = "http://192.168.101.13:3000/users"
+  const urlApi = `${apiUrl}/users`;
 
-  const loadUsers = async () => {
+  const loadUsers = useCallback(async () => {
     setIsLoading(true);
-    const response = await cachasApi.get<UserReponse[]>(urlApi);
-    setListUser( response.data );
-    setIsLoading(false);
-  }
-
-  useEffect( () => {
-    loadUsers();
-  },[]);
+    try {
+      const response = await cachasApi.get<UserReponse[]>(urlApi);
+      setListUser( response.data );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [urlApi]);
 
   const createUser = async ( data: FormUserData ) => {
     const dataBody = {
