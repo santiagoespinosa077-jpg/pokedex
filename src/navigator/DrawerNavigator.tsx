@@ -86,7 +86,7 @@ const Navigator = () => {
         component={ProductoStackNavigator}
       />
       <Drawer.Screen
-        name="DataReponseScreen"
+        name="DataResponseScreen"
         component={DataResponseScreen}
       />
       <Drawer.Screen
