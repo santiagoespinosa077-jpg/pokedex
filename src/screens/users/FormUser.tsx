@@ -44,7 +44,6 @@ export const FormUser = ( { route, navigation }: Props ) => {
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor={C.fondo} />
 
-      {/* Contenedor con zIndex para asegurar que el FAB reciba toques sin interferir */}
       <View style={styles.fabWrapper} pointerEvents="box-none">
         <Fab
           title="→"

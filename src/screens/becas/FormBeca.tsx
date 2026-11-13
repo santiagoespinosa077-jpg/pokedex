@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: C.fondo,
   },
   fabWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 99,
     elevation: 99,
   },

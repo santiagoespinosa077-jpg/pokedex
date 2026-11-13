@@ -7,7 +7,6 @@ import {ActivityIndicator,KeyboardAvoidingView,Platform,ScrollView,StatusBar,Sty
 } from 'react-native';
 import { useLogin } from '../../hooks/useLogin';
 
-// Nueva paleta: Indigo Cyberpunk
 const C = {
   fondo: '#090d16',
   superficieInput: '#111827',
@@ -34,7 +33,7 @@ export const LoginUser = () => {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {/* Glow decorativo de fondo superior */}
+  
         <View style={styles.topGlow} />
 
         {/* Encabezado */}
@@ -44,7 +43,7 @@ export const LoginUser = () => {
           <Text style={styles.subtitle}>Ingresa con tus credenciales para continuar</Text>
         </View>
 
-        {/* Formulario principal */}
+        
         <View style={styles.form}>
           <View style={styles.inputGroup}>
             <Text style={styles.label}>CORREO ELECTRÓNICO</Text>
@@ -82,7 +81,6 @@ export const LoginUser = () => {
             </View>
           </View>
 
-          {/* Botón de acción */}
           <TouchableOpacity
             style={[styles.button, isLoading && styles.buttonDisabled]}
             onPress={() => handleLogin()}

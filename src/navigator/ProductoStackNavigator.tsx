@@ -8,7 +8,7 @@ export type StackProductoParams = {
   HomeProductos: undefined;
 }
 
-const Stack = createStackNavigator<StackTareaParams>();
+const Stack = createStackNavigator<StackProductoParams>();
 
 export const ProductoStackNavigator = () => {
   return (

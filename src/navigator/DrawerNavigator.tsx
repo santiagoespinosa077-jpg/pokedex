@@ -14,7 +14,6 @@ import { DataResponseScreen } from "../screens/DataResponseScreen";
 import { AlumnoDataScreen } from "../screens/AlumnoDataScreen";
 import { ClienteDataScreen } from "../screens/ClienteDataScreen";
 import { EmpleadoDataScreen } from "../screens/EmpleadoDataScreen";
-import { CalificacionDataResponse } from "../interfaces/pandoraApiResponse";
 import { CalificacionDataScreen } from "../screens/CalificacionDataScreen";
 
 
@@ -87,7 +86,7 @@ const Navigator = () => {
         component={ProductoStackNavigator}
       />
       <Drawer.Screen
-        name="DataResponseScreen"
+        name="DataReponseScreen"
         component={DataResponseScreen}
       />
       <Drawer.Screen

@@ -56,11 +56,8 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <BtnMenu navigate={() => navigation.navigate('UserStackNavigator')} text="Gestión de Usuarios" />
         <BtnMenu navigate={() => navigation.navigate('TareaStackNavigator')} text="Tareas" />
         <BtnMenu navigate={() => navigation.navigate('ProductoStackNavigator')} text="Productos" />
-        <BtnMenu navigate={() => navigation.navigate('DataResponseScreen')} text="graficos" />
+        <BtnMenu navigate={() => navigation.navigate('DataResponseScreen')} text="Graficos" />
         <BtnMenu navigate={() => navigation.navigate('AlumnoDataScreen')} text="Alumno Data" />
-        <BtnMenu navigate={() => navigation.navigate('ClienteDataScreen')} text="Cliente Data" />
-        <BtnMenu navigate={() => navigation.navigate('EmpleadoDataScreen')} text="Empleado Data" />
-        <BtnMenu navigate={() => navigation.navigate('CalificacionDataScreen')} text="Calificacion Data" />
       </View>
       
       {authState.isLoggedIn && (
