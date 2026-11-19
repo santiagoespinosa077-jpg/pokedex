@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import LoginUser from "../screens/users/LoginUser";
+import { AuthContext } from "../context/AuthContext";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useWindowDimensions } from "react-native";
 import { DrawerMenu } from "../components/DrawerMenu";
@@ -117,6 +119,6 @@ const Navigator = () => {
   );
 }
 export const DrawerNavigator = () => {
-
-  return <Navigator />;
+  const { authState } = useContext( AuthContext );
+  return ( authState.isLoggedIn ) ? <Navigator /> : <LoginUser/>;
 }

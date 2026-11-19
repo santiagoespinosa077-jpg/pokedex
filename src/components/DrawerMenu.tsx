@@ -46,7 +46,6 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         </Text>
       </View>
 
-      {/* Opciones */}
       <View style={style.menu}>
         <BtnMenu navigate={() => navigation.navigate('StackNavigator')} text="Bolitas y palitos" />
         <BtnMenu navigate={() => navigation.navigate('PokemonNavigator')} text="Pokedex" />

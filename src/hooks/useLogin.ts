@@ -1,7 +1,8 @@
-  import { useReducer, useState, useContext } from "react";
+import { useReducer, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { LoginReponse } from "../interfaces/pandoraApiResponse";
 import { cachasApi } from "../api/cachasApi";
+import { obtenerApiUrlActual } from "../config/api";
 
 export interface LoginData {
   email: string;
@@ -10,7 +11,7 @@ export interface LoginData {
 
 export interface UseLogin {
   isLoading: boolean;
-  state:  LoginData;
+  state: LoginData;
   handleLogin: () => void;
   handleInputChange: ( fieldName: keyof LoginData, value: string ) => void;
   request: LoginReponse;
@@ -38,38 +39,35 @@ export const useLogin = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ state, dispatch ] = useReducer( dataReducer, initialState );
   const [ request, setRequest ] = useState<LoginReponse>({} as LoginReponse);
-  const { singIn, changeUsername, changeAvatar } = useContext( AuthContext ); 
-
-  const apiUrl: string = 'http://192.168.101.13:3000/users/login';
-
+  const { singIn, changeUsername, changeAvatar } = useContext( AuthContext );
+ 
   const handleInputChange = ( fieldName: keyof LoginData, value: string ) => {
-    dispatch({  type:'handleInputChange', payload: { fieldName, value } });
+    dispatch({ type: 'handleInputChange', payload: { fieldName, value } });
   }
-
+ 
   const handleLogin = async () => {
     setIsLoading(true);
-
-    const dataBody = {
-      email: state.email,
-      password: state.password,
-    }
-
-    try{
-      const response = await cachasApi.post<LoginReponse>(apiUrl, dataBody);
-
+ 
+    try {
+      const response = await cachasApi.post<LoginReponse>(
+        `${obtenerApiUrlActual()}/users/login`,
+        { email: state.email, password: state.password }
+      );
+ 
       setRequest( response.data );
-
-      (response.data) && ( () => {
+ 
+      if (response.data) {
         singIn();
-        response.data?.username && changeUsername(response.data.username);
-        response.data?.imagen && changeAvatar(response.data.imagen);
-      })();
-
-    } catch (error){
+        response.data.username && changeUsername(response.data.username);
+        response.data.imagen && changeAvatar(response.data.imagen);
+      }
+    } catch (error) {
       console.log('Error:', error);
+    } finally {
+      setIsLoading(false);
     }
   }
-
+ 
   return { isLoading, state, handleLogin, handleInputChange, request };
-
+ 
 }

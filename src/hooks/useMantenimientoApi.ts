@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { cachasApi } from '../api/cachasApi';
 import { MantenimientoResponse } from '../interfaces/pandoraApiResponse';
 import { FormMantenimientoData } from './useMantenimientoForm';
+import { useApiUrl } from './useApiUrl';
 
 interface UseMantenimientoApi {
     isLoading: boolean;
@@ -12,26 +13,30 @@ interface UseMantenimientoApi {
     deleteMantenimiento: (data: FormMantenimientoData) => Promise<void>;
 }
 
-const urlApi = "http://192.168.101.13:3000/mantenimiento";
-
-
 const buildBody = ({ id_in, ...body }: FormMantenimientoData) => body;
 
 export const useMantenimientoApi = (): UseMantenimientoApi => {
+    const {apiUrl} = useApiUrl();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [listMantenimiento, setListMantenimiento] = useState<MantenimientoResponse[]>([]);
-
-    const loadMantenimiento = async () => {
+    const urlApi = `${apiUrl}/mantenimiento`;
+     
+    const loadMantenimiento = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await cachasApi.get<MantenimientoResponse[]>(urlApi);
-            setListMantenimiento(response.data);
+            const response = await fetch(urlApi);
+            if (!response.ok){
+                console.log('Error al cargar:', response.status, await response.text());
+                return;
+            }
+            const data: MantenimientoResponse[]=await response.json();
+            setListMantenimiento(data);
         } catch (e: any) {
-            console.error("Error loading mantenimiento:", e);
+            console.error("Error loading mantenimiento:", e.response?.status , e.response?.data ?? e.message);
         } finally {
             setIsLoading(false);
         }
-    };
+    },[urlApi]);
 
     const createMantenimiento = async (data: FormMantenimientoData) => {
         try {

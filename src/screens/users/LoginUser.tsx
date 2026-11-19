@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {ActivityIndicator,KeyboardAvoidingView,Platform,ScrollView,StatusBar,StyleSheet,
   Text,
   TextInput,
@@ -6,6 +6,7 @@ import {ActivityIndicator,KeyboardAvoidingView,Platform,ScrollView,StatusBar,Sty
   View
 } from 'react-native';
 import { useLogin } from '../../hooks/useLogin';
+import { useApiUrl } from '../../hooks/useApiUrl';
 
 const C = {
   fondo: '#090d16',
@@ -22,6 +23,15 @@ export const LoginUser = () => {
   const { state, isLoading, handleInputChange, handleLogin } = useLogin();
   const passwordRef = useRef<TextInput>(null);
 
+  const { apiUrl, guardarApiUrl } = useApiUrl();
+  const [servidor, setServidor] = useState(apiUrl);
+  const [verServidor, setVerServidor] = useState(false);
+
+  const entrar = async () => {
+    if (servidor.trim()) setServidor(await guardarApiUrl(servidor));
+    handleLogin();
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.root}
@@ -33,7 +43,7 @@ export const LoginUser = () => {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-  
+
         <View style={styles.topGlow} />
 
         {/* Encabezado */}
@@ -43,7 +53,7 @@ export const LoginUser = () => {
           <Text style={styles.subtitle}>Ingresa con tus credenciales para continuar</Text>
         </View>
 
-        
+
         <View style={styles.form}>
           <View style={styles.inputGroup}>
             <Text style={styles.label}>CORREO ELECTRÓNICO</Text>
@@ -76,14 +86,38 @@ export const LoginUser = () => {
                 secureTextEntry
                 autoCapitalize="none"
                 returnKeyType="done"
-                onSubmitEditing={() => handleLogin()}
+                onSubmitEditing={entrar}
               />
             </View>
           </View>
 
+          <TouchableOpacity onPress={() => setVerServidor(v => !v)}>
+            <Text style={styles.linkServidor}>
+              {verServidor ? 'Ocultar servidor' : 'Cambiar servidor'}
+            </Text>
+          </TouchableOpacity>
+
+          {verServidor && (
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>SERVIDOR (API)</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  value={servidor}
+                  onChangeText={setServidor}
+                  placeholder="http://192.168.1.15:3000"
+                  placeholderTextColor={C.placeholder}
+                  keyboardType="url"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+              </View>
+            </View>
+          )}
+
           <TouchableOpacity
             style={[styles.button, isLoading && styles.buttonDisabled]}
-            onPress={() => handleLogin()}
+            onPress={entrar}
             disabled={isLoading}
             activeOpacity={0.82}
           >
@@ -170,6 +204,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 54,
     paddingHorizontal: 18,
+  },
+  linkServidor: {
+    color: C.acento,
+    fontSize: 13,
+    fontWeight: '600',
+    marginBottom: 18,
   },
   button: {
     alignItems: 'center',

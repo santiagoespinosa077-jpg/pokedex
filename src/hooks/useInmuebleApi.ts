@@ -1,7 +1,8 @@
-import {useState} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import {cachasApi} from '../api/cachasApi';
 import {InmuebleResponse} from '../interfaces/pandoraApiResponse';
 import {FormInmuebleData} from './useInmuebleForm';
+import { useApiUrl } from './useApiUrl';
 
 interface UseInmuebleApi {
     isLoading: boolean;
@@ -11,25 +12,31 @@ interface UseInmuebleApi {
     updateInmueble: (data: FormInmuebleData) => Promise<void>;
     deleteInmueble: (data: FormInmuebleData) => Promise<void>;
 }
-const urlApi = "http://192.168.101.13:3000/inmueble";
 
 const buildBody = ({ id_im, ...body }: FormInmuebleData) => body;
 
 export const useInmuebleApi = (): UseInmuebleApi =>{
+    const {apiUrl}= useApiUrl();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [listInmueble, setListInmueble] = useState<InmuebleResponse[]>([]);
-    
-    const loadInmueble = async () => {
+    const urlApi = `${apiUrl}/inmueble`;
+
+    const loadInmueble = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = await cachasApi.get<InmuebleResponse[]>(urlApi);
-            setListInmueble(response.data);
+            const response = await fetch(urlApi);
+            if(!response.ok){
+                console.log('Error al cargar:', response.status, await response.text());
+                return;
+            }
+            const data: InmuebleResponse[]= await response.json();
+            setListInmueble(data);
         } catch (e: any) {
-            console.error("Error loading inmueble:", e);
+            console.error("Error loading inmueble:", e.message);
         } finally {
             setIsLoading(false);
         }
-    };
+    },[urlApi]);
 
     const createInmueble = async (data: FormInmuebleData) => {
         try {
