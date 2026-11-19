@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "app_dsm43_2026",
+    "name": "app_perrona_2026",
     "slug": "dsm43",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.cachasinc.dsm43",
+      "package": "com.cachas.dsm43",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -64,11 +64,6 @@
         }
       ],
       "expo-status-bar"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "1d70f3da-4fc2-42ff-b4ee-e5d00c656b3e"
-      }
-    }
+    ]
   }
 }
