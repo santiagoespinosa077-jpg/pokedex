@@ -13,7 +13,7 @@ interface UseTypeColorPokemon {
 }
 
 export const useTypeColorPokemon = ( id: string | number ): UseTypeColorPokemon => {
-  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ color, setColor ] = useState<string[]>([]);
 
   const tipo: TypePokemon[] = [
@@ -41,16 +41,21 @@ export const useTypeColorPokemon = ( id: string | number ): UseTypeColorPokemon 
   const getColorType = ( pokemonType: Type[] ) => {
     const listColor = pokemonType.map( ( { type } ) => {
       const found = tipo.find( (element) => element.name == type.name );
-      return (found) ? found.color : 'defaultColor';
+      return (found) ? found.color : '#68A090';
     });
     setColor(listColor);
   }
 
   const loadType = async () => {
     setIsLoading(true);
-    const response = await cachasApi.get<PokemonDetailResponse>(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    getColorType( response.data.types );
-    setIsLoading(false);
+    try {
+      const response = await cachasApi.get<PokemonDetailResponse>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      getColorType( response.data.types );
+    } catch (e) {
+      setColor(['#68A090']);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect( () => {

@@ -33,8 +33,13 @@ export const FormUser = ( { route, navigation }: Props ) => {
     handleInputChange('username', user.username);
     handleInputChange('email', user.email);
     handleInputChange('imagen', user.imagen);
-    handleInputChange('location', `${location?.coords.altitude},${location?.coords.latitude}`);
   }, []);
+
+  useEffect(() => {
+    if (location) {
+      handleInputChange('location', `${location.coords.latitude},${location.coords.longitude}`);
+    }
+  }, [location]);
 
   useEffect(() => {
     image64 && handleInputChange('imagen', image64);
@@ -168,7 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: C.fondo,
   },
   fabWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 99,
     elevation: 99,
   },

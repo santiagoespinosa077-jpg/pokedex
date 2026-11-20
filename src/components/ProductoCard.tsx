@@ -1,13 +1,15 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { ProductosResponse } from '../interfaces/pandoraApiResponse';
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackProductoParams } from '../navigator/ProductoStackNavigator';
 
 interface Props {
   producto: ProductosResponse;
 }
 
 export const ProductoCard = ({ producto }: Props) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackProductoParams>>();
 
   return (
     <TouchableOpacity
@@ -43,7 +45,7 @@ export const ProductoCard = ({ producto }: Props) => {
               ${producto.precio}
             </Text>
             <Text style={style.priceText}>
-              {producto.Estado}
+              {producto.estado}
             </Text>
             <View style={style.stockBadge}>
               <Text style={style.stockText}>

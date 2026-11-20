@@ -1,11 +1,11 @@
-import { View, Text, Image, ActivityIndicator, FlatList } from 'react-native';
+import { View, Image, ActivityIndicator, FlatList } from 'react-native';
 import { appTheme } from '../../theme/appTheme';
 import { usePokemonPaginated } from '../../hooks/usePokemonPaginated';
 import { PokemonCard } from '../../components/pokemonCard';
 
 export const PokemonHome = () => {
 
-  const { isLoading, simplePokemonList, loadPokemons } = usePokemonPaginated();
+  const { simplePokemonList, loadPokemons } = usePokemonPaginated();
 
   return(
     <View
@@ -21,7 +21,6 @@ export const PokemonHome = () => {
         source={ require('./../../../assets/Van.jpg') }
       />
         
-      
       <FlatList
         data={ simplePokemonList }
         keyExtractor={ (pokemon, index) => `${pokemon.id}${index}` }

@@ -16,9 +16,8 @@ export const FormScreen = () => {
         FormScreen
       </Text>
       <View
-        syle={appTheme.container}
+        style={appTheme.container}
       >
-      {/*Form User Data*/}
       <View>
         <TextInput
           style={ appTheme.textInput }

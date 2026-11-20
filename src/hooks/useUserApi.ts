@@ -30,6 +30,11 @@ export const useUserApi = (): UseUserApi => {
       setIsLoading(false);
     }
   }, [urlApi]);
+  
+   useEffect( () => {
+    loadUsers();
+  },[]);
+
 
   const createUser = async ( data: FormUserData ) => {
     const dataBody = {

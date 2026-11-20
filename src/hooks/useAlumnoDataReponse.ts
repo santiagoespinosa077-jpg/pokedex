@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-import { cachasApi } from "../api/cachasApi";
 import { AlumnoDataResponse } from "../interfaces/pandoraApiResponse";
 import { useApiUrl } from './useApiUrl';
 

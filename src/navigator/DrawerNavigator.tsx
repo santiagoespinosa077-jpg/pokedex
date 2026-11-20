@@ -14,9 +14,6 @@ import { TareaStackNavigator } from "./TareaStackNavigator";
 import { ProductoStackNavigator } from "./ProductoStackNavigator";
 import { DataResponseScreen } from "../screens/DataResponseScreen";
 import { AlumnoDataScreen } from "../screens/AlumnoDataScreen";
-import { ClienteDataScreen } from "../screens/ClienteDataScreen";
-import { EmpleadoDataScreen } from "../screens/EmpleadoDataScreen";
-import { CalificacionDataScreen } from "../screens/CalificacionDataScreen";
 import { ConfigServidorScreen } from "../screens/ConfigServidorScreen";
 
 
@@ -29,10 +26,8 @@ export type RootDrawerParams = {
   UserStackNavigator: undefined;
   TareaStackNavigator: undefined;
   ProductoStackNavigator: undefined;
-  DataReponseScreen: undefined;
+  DataResponseScreen: undefined;
   AlumnoDataScreen: undefined;
-  ClienteDataScreen: undefined;
-  EmpleadoDataScreen: undefined;
   CalificacionDataScreen: undefined;
   ConfigServerScreen: undefined;
 
@@ -98,18 +93,6 @@ const Navigator = () => {
         component={AlumnoDataScreen}
       />
       <Drawer.Screen
-        name="ClienteDataScreen"
-        component={ClienteDataScreen}
-      />
-      <Drawer.Screen
-        name="EmpleadoDataScreen"
-        component={EmpleadoDataScreen}
-      />
-      <Drawer.Screen
-        name="CalificacionDataScreen"
-        component={CalificacionDataScreen}
-      />
-       <Drawer.Screen
         name="ConfigServerScreen"
         component={ConfigServidorScreen}
       />

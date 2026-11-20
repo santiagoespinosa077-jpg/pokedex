@@ -5,8 +5,9 @@ import { UserReponse } from '../../interfaces/pandoraApiResponse';
 import { useUserApi } from '../../hooks/useUserApi';
 import { UserCard } from '../../components/UserCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackUserParams } from '../../navigator/UserStackNavigator';
 import {BtnTouch} from '../../components/BtnTouch';
-import { FormUserData } from '../../hooks/useUserForm';
 
 
 export const HomeUser = () => {
@@ -15,7 +16,7 @@ export const HomeUser = () => {
 
   const focused = useIsFocused();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackUserParams>>();
 
   useEffect( ()  => {
     (!isLoading) && loadUsers(); 

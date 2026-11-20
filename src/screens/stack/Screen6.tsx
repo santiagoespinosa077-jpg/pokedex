@@ -1,4 +1,4 @@
-import { View, Text, useWindowDimensions, StyleSheet} from 'react-native';
+import { View, useWindowDimensions, StyleSheet} from 'react-native';
 import { appTheme } from '../../theme/appTheme';
 import { StackParams } from '../../navigator/StackNavigator';
 import { StackScreenProps } from '@react-navigation/stack';

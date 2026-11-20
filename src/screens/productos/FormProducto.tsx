@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { appTheme } from '../../theme/appTheme';
 import { BtnTouch } from '../../components/BtnTouch';
-import { Fab } from '../../components/Fab';
 import { StackScreenProps } from '@react-navigation/stack';
-import { StackProductoParams } from '../../navigator/PrductoStackNavigator';
+import { StackProductoParams } from '../../navigator/ProductoStackNavigator';
 import { useImagePicker } from '../../hooks/useImagePicker';
 import { useProductoForm } from '../../hooks/useProductoForm';
-import { EstadoProducto, nextState } from '../../interfaces/pandoraApiResponse';
+import { EstadoProducto, nextState} from '../../interfaces/pandoraApiResponse';
 
-interface Props extends StackScreenProps<StackProductoParams, 'FormProductos'> {}
+interface Props extends StackScreenProps<StackProductoParams, 'FormProducto'> {}
 
 export const FormProducto = ({ route, navigation }: Props) => {
   const { state, handleInputChange, handleSubmit, handleDelete, handleUpdate } = useProductoForm();
@@ -51,7 +49,6 @@ export const FormProducto = ({ route, navigation }: Props) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.card}>
-          {/* Cabecera interna con el FAB alineado dentro de la tarjeta */}
           <View style={styles.headerRow}>
             <TouchableOpacity 
               activeOpacity={0.7}

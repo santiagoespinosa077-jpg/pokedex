@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { TareaResponse } from '../interfaces/pandoraApiResponse';
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackTareaParams } from '../navigator/TareaStackNavigator';
 
 interface Props {
   tarea: TareaResponse;
@@ -9,7 +11,7 @@ interface Props {
 
 export const TareaCard = ( { tarea }: Props ) => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackTareaParams>>();
 
   return (
     <TouchableOpacity

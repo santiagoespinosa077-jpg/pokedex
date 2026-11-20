@@ -3,23 +3,23 @@ import {BtnTouch} from '../components/BtnTouch';
 import {useCounterReducer} from '../hooks/useCounterReducer';
 
 
-export const ConterReducerScreen = () =>{
+export const CounterReducerScreen = () =>{
 
 	const{state, add, decrement, reset, add2, decrement2 }= useCounterReducer ({count:0});
 
 	return (
-		<view 
+		<View 
 			style={style.container}
 		>
-			<text
+			<Text
 				style={style.text}
 			>
 
-			</text>
+			</Text>
 			<BtnTouch
-				text="Add",
-				color='violet',
-				borderColor='white',
+				text="Add"
+				color='violet'
+				borderColor='white'
 				onPress={ ()=> add ()}
 			/>
 
@@ -29,9 +29,9 @@ export const ConterReducerScreen = () =>{
       		/>
 			
 			<BtnTouch
-				text="Decrement",
-				color='red',
-				borderColor='orange',
+				text="Decrement"
+				color='red'
+				borderColor='orange'
 				onPress={ ()=> decrement()}
 			/>
 			
@@ -41,7 +41,7 @@ export const ConterReducerScreen = () =>{
       		/>
 
 			<BtnTouch
-				text="Reset",
+				text="Reset"
 				onPress={()=> reset()}
 
 			/>

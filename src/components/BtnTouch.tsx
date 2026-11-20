@@ -1,23 +1,25 @@
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 interface Props {
   text: string;
   color?: string;
   borderColor?: string;
+  borderWidth?: number;
+  style?: StyleProp<ViewStyle>;
   onPress: () => void;
 }
 
-export const BtnTouch = ( { text, color='blue', borderColor='white', onPress }: Props ) => {
+export const BtnTouch = ( { text, color='blue', borderColor='white', borderWidth=4, style: extraStyle, onPress }: Props ) => {
   return(
     <TouchableOpacity
       onPress={ () => onPress() }
     >
       <View
-        style={{
-          ...style.container,
-          backgroundColor: color,
-          borderColor: borderColor
-        }}
+        style={[
+          style.container,
+          { backgroundColor: color, borderColor: borderColor, borderWidth: borderWidth },
+          extraStyle
+        ]}
       >
         <Text
           style={style.text}

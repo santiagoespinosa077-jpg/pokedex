@@ -25,6 +25,7 @@ export const useUserForm = (): UseUserForm => {
     email:    '',
     password: '',
     imagen:   '',
+    location: ''
   }
 
   type Action = { type: 'handleInputChange', payload: { fieldName: keyof FormUserData, value: string | number } };

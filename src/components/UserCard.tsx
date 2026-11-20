@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { UserReponse } from '../interfaces/pandoraApiResponse';
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackUserParams } from '../navigator/UserStackNavigator';
 
 interface Props {
   user: UserReponse;
@@ -8,7 +10,7 @@ interface Props {
 
 export const UserCard = ({ user }: Props) => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackUserParams>>();
 
   return (
     <TouchableOpacity
@@ -40,7 +42,7 @@ export const UserCard = ({ user }: Props) => {
         <View style={style.infoBlock}>
           <Text style={style.label}>Última actualización</Text>
           <Text style={style.value} numberOfLines={1}>
-            {user.update}
+            {new Date(user.update).toLocaleDateString()}
           </Text>
         </View>
 

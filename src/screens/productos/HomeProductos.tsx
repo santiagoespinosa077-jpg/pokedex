@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { View, Text, FlatList, RefreshControl, Image, StyleSheet } from 'react-native';
 import { appTheme } from '../../theme/appTheme';
-import { ProductoResponse, EstadoProducto } from '../../interfaces/pandoraApiResponse';
+import { ProductosResponse, EstadoProducto } from '../../interfaces/pandoraApiResponse';
 import { useProductosApi } from '../../hooks/useProductosApi';
 import { ProductoCard } from '../../components/ProductoCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { BtnTouch } from '../../components/BtnTouch';
-import {FormProductoForm} from '../../hooks/useProductoForm'
 
 export const HomeProductos = () => {
 
@@ -20,11 +19,11 @@ export const HomeProductos = () => {
     (!isLoading) && loadProducto();
   }, [ focused ]);
 
-  const create: ProductoResponse = {
+  const create: ProductosResponse = {
     id_producto: 0,
     sku:    '',
     nombre_producto: '',
-    descripcion: '',
+    precio:'',
     categoria: '',
     marca: '',
     existencias: '',
@@ -98,13 +97,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     width: '100%',
     height: '100%',
     opacity: 0.77,
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(0, 0, 0, 0.25)',
   },
   listContent: {

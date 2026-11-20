@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { PokemonParams } from '../navigator/PokemonNavigator';
 import { NewPokemonList } from '../interfaces/pokemonReponse';
 import { useTypeColorPokemon } from '../hooks/useTypeColorPokemon';
 
@@ -12,7 +14,7 @@ const widthWindows = Dimensions.get('window').width;
 export const PokemonCard = ( { pokemon }:Props ) => {
 
   const { isLoading, color } = useTypeColorPokemon( pokemon.id );
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<PokemonParams>>();
 
   return(
     <TouchableOpacity

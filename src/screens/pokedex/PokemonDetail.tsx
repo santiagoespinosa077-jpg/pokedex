@@ -9,7 +9,7 @@ interface Props extends StackScreenProps<PokemonParams, 'PokemonDetail'>{};
 
 export const PokemonDetail = ( { navigation, route }:Props ) => {
   const data = route.params.NewPokemonList;
-  const { id, name, url, image } = data;
+  const { id, name, image } = data;
   const { isLoading, color } = useTypeColorPokemon(id);
   const { pokemonDetail } = usePokemonFull(id);
 

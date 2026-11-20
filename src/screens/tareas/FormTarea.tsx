@@ -5,7 +5,7 @@ import { Fab } from '../../components/Fab';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackTareaParams } from '../../navigator/TareaStackNavigator';
 import { useTareaForm } from '../../hooks/useTareaForm';
-import { EstadoTarea, siguienteEstado } from '../../interfaces/pandoraApiResponse';
+import { siguienteEstado } from '../../interfaces/pandoraApiResponse';
 
 interface Props extends StackScreenProps<StackTareaParams, 'FormTarea'> {};
 
@@ -35,9 +35,9 @@ export const FormTarea = ( { route, navigation }: Props ) => {
 
   return (
     <View style={styles.root}>
-      <StatusBar barStyle="light-content" backgroundColor={C.fondo} />
+      <StatusBar barStyle="light-content" />
 
-      {/* Fab con wrapper sin colisión de eventos */}
+      
       <View style={styles.fabWrapper} pointerEvents="box-none">
         <Fab
           title="→"
@@ -70,7 +70,6 @@ export const FormTarea = ( { route, navigation }: Props ) => {
           )}
         </View>
 
-        {/* Formulario */}
         <View style={styles.form}>
           <View style={styles.fieldGroup}>
             <Text style={styles.label}>TÍTULO DE LA TAREA</Text>
@@ -96,7 +95,6 @@ export const FormTarea = ( { route, navigation }: Props ) => {
             />
           </View>
 
-          {/* Grupo de Botones de Acción */}
           <View style={styles.buttonGroup}>
             <BtnTouch
               text={state.id_tarea === 0 ? 'Crear tarea' : 'Actualizar tarea'}
@@ -153,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: C.fondo,
   },
   fabWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 99,
     elevation: 99,
   },

@@ -34,7 +34,7 @@ export const useProductoForm = (): UseProductoForm => {
     precio: '',
     categoria: '',
     marca: '',
-    existencia: '',
+    existencias: '',
     descripcion: '',
     provedor: '',
     estado:   EstadoProducto.normal,

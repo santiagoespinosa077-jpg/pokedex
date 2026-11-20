@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { View, Text, ScrollView, StyleSheet, useWindowDimensions, RefreshControl} from 'react-native';
 import { useDataResponse } from '../hooks/useDataReponse';
-import { BarChart, LineChart } from 'react-native-gifted-charts';
+import { LineChart } from 'react-native-gifted-charts';
 import { appTheme } from '../theme/appTheme';
 
 const C = {

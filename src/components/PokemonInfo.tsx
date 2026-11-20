@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, ScrollView, Dimensions} from 'react-native';
+import { View, Text, Image, ScrollView} from 'react-native';
 import { PokemonDetailResponse } from '../interfaces/pokemonReponse';
 import {pokemonTheme} from "../theme/pokemonTheme"
 

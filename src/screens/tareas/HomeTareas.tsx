@@ -6,7 +6,6 @@ import { useTareaApi } from '../../hooks/useTareaApi';
 import { TareaCard } from '../../components/TareaCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { BtnTouch } from '../../components/BtnTouch';
-import {FormTareaData} from "../../hooks/useTareaForm";
 
 export const HomeTareas = () => {
 
@@ -92,13 +91,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     width: '100%',
     height: '100%',
     opacity: 0.77,
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(0, 0, 0, 0.25)',
   },
   listContent: {
