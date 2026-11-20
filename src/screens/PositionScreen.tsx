@@ -2,7 +2,7 @@ import { View, StyleSheet, useWindowDimensions } from "react-native";
 
 export const PositionScreen = () => {
   
-  const {height, width} = useWindowDimensions();
+  const {width} = useWindowDimensions();
 
   return (
     <View

@@ -6,6 +6,8 @@ import { useProductosApi } from '../../hooks/useProductosApi';
 import { ProductoCard } from '../../components/ProductoCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { BtnTouch } from '../../components/BtnTouch';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { StackProductoParams } from '../../navigator/ProductoStackNavigator';
 
 export const HomeProductos = () => {
 
@@ -13,7 +15,7 @@ export const HomeProductos = () => {
 
   const focused = useIsFocused();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackProductoParams>>();
 
   useEffect( () => {
     (!isLoading) && loadProducto();

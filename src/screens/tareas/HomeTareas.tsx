@@ -6,6 +6,8 @@ import { useTareaApi } from '../../hooks/useTareaApi';
 import { TareaCard } from '../../components/TareaCard';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { BtnTouch } from '../../components/BtnTouch';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { StackTareaParams } from '../../navigator/TareaStackNavigator';
 
 export const HomeTareas = () => {
 
@@ -13,7 +15,7 @@ export const HomeTareas = () => {
 
   const focused = useIsFocused();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<StackTareaParams>>();
 
   useEffect( () => {
     (!isLoading) && loadTarea();

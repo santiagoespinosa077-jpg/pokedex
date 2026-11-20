@@ -5,7 +5,7 @@ import {useCounterReducer} from '../hooks/useCounterReducer';
 
 export const CounterReducerScreen = () =>{
 
-	const{state, add, decrement, reset, add2, decrement2 }= useCounterReducer ({count:0});
+	const{ add, decrement, reset, add2, decrement2 }= useCounterReducer ({count:0});
 
 	return (
 		<View 

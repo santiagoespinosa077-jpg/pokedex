@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { StackProductoParams } from '../../navigator/ProductoStackNavigator';
 import { useImagePicker } from '../../hooks/useImagePicker';
 import { useProductoForm } from '../../hooks/useProductoForm';
-import { EstadoProducto, nextState} from '../../interfaces/pandoraApiResponse';
+import { nextState} from '../../interfaces/pandoraApiResponse';
 
 interface Props extends StackScreenProps<StackProductoParams, 'FormProducto'> {}
 
